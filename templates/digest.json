@@ -1,0 +1,29 @@
+{
+  "kind": "digest",
+  "id": "replace-period-topic-id",
+  "title": "待填：帶觀察期間的話題標題",
+  "summary": "待填：觀察結果與限制",
+  "status": "draft",
+  "updated": null,
+  "evidenceLevel": "insufficient-data",
+  "observation": {
+    "timezone": "Asia/Taipei",
+    "start": null,
+    "end": null,
+    "researchedAt": null,
+    "platforms": [],
+    "keywords": [],
+    "includedPostCount": 0,
+    "independentAccountCount": 0,
+    "comparisonBasis": "待填：實際可取得的比較依據或無法比較的原因",
+    "researchFile": "research/REPLACE-date-topic.md",
+    "limitations": []
+  },
+  "sections": [
+    { "heading": "社群在討論什麼", "paragraphs": [], "bullets": [], "sourceIds": [] },
+    { "heading": "知識查證結果", "paragraphs": [], "bullets": [], "sourceIds": [] },
+    { "heading": "限制與不同說法", "paragraphs": [], "bullets": [], "sourceIds": [] }
+  ],
+  "relatedIds": [],
+  "sourceIds": []
+}

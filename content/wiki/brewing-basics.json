@@ -1,0 +1,12 @@
+{
+  "kind": "wiki", "id": "brewing-basics",
+  "title": "泡茶先別背一套秒數：先看器具，再調整",
+  "summary": "同樣一款茶，用馬克杯泡和小茶壺分次泡，讀法不一樣。",
+  "status": "published", "updated": "2026-11-15", "categoryId": "brewing", "secondaryCategoryIds": [], "aliases": ["沖泡", "茶水比", "茶水比例"],
+  "sections": [
+    { "heading": "茶水比，就是茶葉和水的用量關係", "paragraphs": ["例如 3 公克茶葉配 150 毫升水，可寫成 1 公克配 50 毫升。這裡只是教你看懂比例，不能當作每款茶的最佳配方。杯泡教案也提醒先看包裝建議，再依經驗調整。"], "bullets": [], "sourceIds": ["school-tea-practice"] },
+    { "heading": "先問：你打算怎麼泡？", "paragraphs": ["茶改場教材把杯泡和茶壺法分開說明。像有內膽的馬克杯，沖泡後能把茶葉取出，避免一直泡著。", "讀到一個建議時間時，先看看它是在講杯泡、茶壺法，還是特定茶款；別把一種方法的數字直接搬到另一種方法。"], "bullets": [], "sourceIds": ["tbrs-taiwan-tea-handout", "school-tea-practice"] },
+    { "heading": "做個小練習，留下自己的紀錄", "paragraphs": ["本站練習：先照手上茶的包裝建議泡一次，記下茶量、水量、水溫、時間與感受。下一次只調整一項，方便比較。這是學習安排，不是保證風味的標準配方。"], "bullets": [], "sourceIds": ["school-tea-practice"] }
+  ],
+  "relatedIds": ["six-tea-types", "light-and-roasted-styles"], "sourceIds": ["school-tea-practice", "tbrs-taiwan-tea-handout"]
+}

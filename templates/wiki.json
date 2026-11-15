@@ -1,0 +1,18 @@
+{
+  "kind": "wiki",
+  "id": "replace-topic-id",
+  "title": "待填：知識條目標題",
+  "summary": "待填：一句話說明讀者能理解什麼",
+  "status": "draft",
+  "updated": null,
+  "categoryId": "origins",
+  "secondaryCategoryIds": [],
+  "aliases": [],
+  "sections": [
+    { "heading": "核心概念", "paragraphs": [], "bullets": [], "sourceIds": [] },
+    { "heading": "如何辨識與應用", "paragraphs": [], "bullets": [], "sourceIds": [] },
+    { "heading": "常見混淆與適用範圍", "paragraphs": [], "bullets": [], "sourceIds": [] }
+  ],
+  "relatedIds": [],
+  "sourceIds": []
+}

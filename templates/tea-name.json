@@ -1,0 +1,25 @@
+{
+  "kind": "tea-name",
+  "id": "replace-tea-name-id",
+  "title": "待填：完整茶名",
+  "summary": "待填：這個茶名範例的閱讀重點",
+  "status": "draft",
+  "updated": null,
+  "exampleType": "illustrative",
+  "originalName": "待填：保留來源中的名稱與順序",
+  "terms": [
+    {
+      "text": "待填：原始詞語",
+      "role": "產地",
+      "explanation": "待填：有來源支持的解釋",
+      "categoryId": "origins",
+      "entryId": null,
+      "verification": "pending",
+      "sourceIds": []
+    }
+  ],
+  "plainLanguage": "待填：只整合已確認資訊的白話翻譯",
+  "limitations": [],
+  "relatedIds": [],
+  "sourceIds": []
+}

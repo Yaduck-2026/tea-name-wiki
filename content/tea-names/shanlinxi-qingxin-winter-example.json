@@ -1,0 +1,33 @@
+{
+  "kind": "tea-name", "id": "shanlinxi-qingxin-winter-example",
+  "title": "杉林溪龍鳳峽・青心烏龍・清香型・冬茶",
+  "summary": "四個詞，分別回答哪裡來、哪個品種、什麼風格、哪個茶季。",
+  "status": "published", "updated": "2026-11-15", "exampleType": "illustrative",
+  "originalName": "杉林溪龍鳳峽・青心烏龍・清香型・冬茶",
+  "terms": [
+    {
+      "text": "杉林溪龍鳳峽", "role": "產地",
+      "explanation": "這一段是在說『來自哪裡』。品牌商品頁有把杉林溪龍鳳峽列為產地的用法；這裡示範怎麼讀名稱，不替任何實體茶品驗明產地。",
+      "categoryId": "origins", "entryId": "taiwan-tea-origins", "verification": "verified", "sourceIds": ["teawei-longfengxia", "moa-tea-intro"]
+    },
+    {
+      "text": "青心烏龍", "role": "品種",
+      "explanation": "這一段是在說『用了哪個茶樹品種』。例如看見青心烏龍，先放進品種欄，再另外看它做成哪類茶。",
+      "categoryId": "cultivars", "entryId": "qingxin-oolong", "verification": "verified", "sourceIds": ["ntsec-qingxin"]
+    },
+    {
+      "text": "清香型", "role": "製作風格",
+      "explanation": "這一段先當成風格方向來讀。例如台灣清香型球形烏龍茶的風味輪，會用花香、甜香幫助描述；名稱本身沒有交代完整製程。",
+      "categoryId": "styles", "entryId": "light-and-roasted-styles", "verification": "verified", "sourceIds": ["moa-flavor-wheel"]
+    },
+    {
+      "text": "冬茶", "role": "採收季節",
+      "explanation": "這一段是在說冬茶季。官方資料以立冬前後描述冬茶採收；它不是另一個品種，也不是精確的採收日期。",
+      "categoryId": null, "entryId": null, "verification": "verified", "sourceIds": ["moa-winter-harvest", "moa-tea-intro"]
+    }
+  ],
+  "plainLanguage": "把這個教學示例翻成白話，就是：一款標示來自杉林溪龍鳳峽、使用青心烏龍品種、在冬茶季採收，並呈現清香風格的茶。",
+  "limitations": ["這是依使用者提供名稱整理的組合教學示例，不是已找到的同名商品或經檢驗的茶品。", "逐詞 verified 表示詞語角色已有來源，不表示已驗證整款茶的產銷履歷。", "龍鳳峽用法參考業者商品標示，不延伸為行政界線、統一海拔或特定批次來源證明。", "不從這四個詞補推完整製程、香氣保證、茶類或沖泡數字；冬茶季也不等同嚴格的曆法冬季。"],
+  "relatedIds": ["taiwan-tea-origins", "qingxin-oolong", "light-and-roasted-styles", "six-tea-types", "brewing-basics"],
+  "sourceIds": ["teawei-longfengxia", "moa-tea-intro", "ntsec-qingxin", "moa-flavor-wheel", "moa-winter-harvest"]
+}

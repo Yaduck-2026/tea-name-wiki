@@ -1,0 +1,38 @@
+[
+  {
+    "path": "content/digests/social-observation-2026-11-15.json",
+    "sha256": "01d6ecfadc30ee9d1bb4e89785c19d548e61d68da01cd4afc60e208f8a5cbb32"
+  },
+  {
+    "path": "content/tea-names/shanlinxi-qingxin-winter-example.json",
+    "sha256": "d230e8e88628e8d49e4ef5e642066a4057ed3c1bba7855b5fdde818551a45974"
+  },
+  {
+    "path": "content/wiki/brewing-basics.json",
+    "sha256": "cce588d709ed7bcaad60da35fcb7ed776345392fed3e142a22249512122c6ac3"
+  },
+  {
+    "path": "content/wiki/light-and-roasted-styles.json",
+    "sha256": "410ecf89b857d3c82fd2263c268f6dd2856f929185bbd59af71a2eb99c3ae751"
+  },
+  {
+    "path": "content/wiki/oriental-beauty.json",
+    "sha256": "ecfb038d619ff5d1c959f2cf66866a75114b6d95470af4e39114d24d482591fd"
+  },
+  {
+    "path": "content/wiki/qingxin-oolong.json",
+    "sha256": "6975c59232ecc96fd21bbe604a178816b9f6464fa2d7c914f0a1acf40e5ab28a"
+  },
+  {
+    "path": "content/wiki/six-tea-types.json",
+    "sha256": "73e9a56ee2ce4c06182a0fbad529c5f40972f84dda603ca75b767fae462bd448"
+  },
+  {
+    "path": "content/wiki/taiwan-tea-origins.json",
+    "sha256": "48f09b08af18350871d8268533c1c006ef0af82bed56ff87650dd789e97d908d"
+  },
+  {
+    "path": "sources/registry.json",
+    "sha256": "98098d21ae722ce562cccb20b0b79b0887e8311e48c2b520ee89f63ec178b6dc"
+  }
+]

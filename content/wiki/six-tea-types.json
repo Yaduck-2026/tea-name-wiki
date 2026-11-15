@@ -1,0 +1,12 @@
+{
+  "kind": "wiki", "id": "six-tea-types",
+  "title": "六大茶類入門：先看怎麼做，別只猜茶湯顏色",
+  "summary": "綠、白、黃、青、紅、黑是一套茶類入口；台灣特色茶風味輪則是另一套閱讀工具。",
+  "status": "published", "updated": "2026-11-15", "categoryId": "tea-types", "secondaryCategoryIds": [], "aliases": ["六大茶類", "青茶", "烏龍茶"],
+  "sections": [
+    { "heading": "六種名稱，先記製程線索", "paragraphs": ["可以先把製程理解成『茶葉採下來以後，經過哪些處理』。以下是入門線索，實際製法仍有地區差異。"], "bullets": ["綠茶：先蒸菁或炒菁，抑制酵素氧化。", "白茶：長時間萎凋是重要線索；萎凋可先理解為讓茶菁失水的處理。", "黃茶：注意悶黃這道程序。", "青茶：常說的烏龍茶類，可見萎凋、靜置攪拌，再炒菁等處理。", "紅茶：揉捻後讓氧化反應充分進行。", "黑茶：後發酵涉及微生物，不能只看茶湯深淺。"], "sourceIds": ["moa-tea-process"] },
+    { "heading": "『發酵』這個詞，要看上下文", "paragraphs": ["製茶資料裡，紅茶、烏龍茶的發酵常是在談酵素促成的氧化；黑茶的後發酵則涉及微生物。兩者別當成完全一樣的事。"], "bullets": [], "sourceIds": ["moa-tea-process"] },
+    { "heading": "遇到另一組『六大』，先問是哪套分類", "paragraphs": ["例如看到『清香型球形烏龍茶、東方美人茶』，這是在台灣特色茶風味輪的脈絡中找茶。它的六組名稱，並不是綠、白、黃、青、紅、黑的逐項改名。"], "bullets": ["台灣風味輪六組：台灣綠茶、清香型條形包種茶、清香型球形烏龍茶、焙香型球形烏龍茶、東方美人茶、台灣紅茶。"], "sourceIds": ["moa-flavor-wheel", "moa-tea-process"] }
+  ],
+  "relatedIds": ["qingxin-oolong", "oriental-beauty", "light-and-roasted-styles"], "sourceIds": ["moa-tea-process", "moa-flavor-wheel"]
+}

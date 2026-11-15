@@ -1,0 +1,74 @@
+[
+  {
+    "id": "moa-tea-intro", "type": "official",
+    "title": "逗陣來識茶", "author": "農業部食農教育資訊整合平臺",
+    "url": "https://fae.moa.gov.tw/theme_data.php?id=50&sub_theme=knowledge&theme=topics",
+    "publishedAt": null, "accessedAt": "2026-11-15T22:47:19+08:00", "accessStatus": "readable",
+    "platform": null, "accountHandle": null, "accountUrl": null, "identityCheck": null,
+    "supports": ["產地、品種、季節與焙火可分開閱讀", "冬茶是採茶季節用語"],
+    "limitations": ["頁面只明示更新日期 2024-11-05，未見原始發布日期", "不將其簡化分類、季節範圍當成所有茶的絕對規則"]
+  },
+  {
+    "id": "moa-tea-process", "type": "official",
+    "title": "臺灣特色茶分類及加工製程簡介", "author": "農業部農業知識入口網・茶葉主題館",
+    "url": "https://kmweb.moa.gov.tw/subject/subject.php?id=50853&print=Y",
+    "publishedAt": "2023-03-01", "accessedAt": "2026-11-15T22:47:19+08:00", "accessStatus": "readable",
+    "platform": null, "accountHandle": null, "accountUrl": null, "identityCheck": null,
+    "supports": ["六大茶類及加工差異", "酵素氧化與黑茶微生物後發酵的區別", "臺灣特色茶的製程分類"],
+    "limitations": ["茶改場原站同名文章本次逾時，使用農業知識入口網可讀版本", "不把文內發酵程度估計當成每款茶的固定規格"]
+  },
+  {
+    "id": "ntsec-qingxin", "type": "official",
+    "title": "青心烏龍", "author": "國立臺灣科學教育館",
+    "url": "https://www.ntsec.gov.tw/article/detail.aspx?a=5456",
+    "publishedAt": null, "accessedAt": "2026-11-15T22:47:19+08:00", "accessStatus": "readable",
+    "platform": null, "accountHandle": null, "accountUrl": null, "identityCheck": null,
+    "supports": ["青心烏龍為地方品種", "同品種可見於不同成茶類別"],
+    "limitations": ["頁面更新日期 2025-08-27，原始發布日期未明示", "品種資料不能證明某一商品的實際品種或產地"]
+  },
+  {
+    "id": "tbrs-taiwan-tea-handout", "type": "official",
+    "title": "國產農漁畜產品教材：臺灣茶（2024 年 9 月版）", "author": "農業部茶及飲料作物改良場；賴正南、林金池、黃宣翰、楊美珠、蘇宗振",
+    "url": "https://fae.moa.gov.tw/files/topics/3032/A02_2.pdf",
+    "publishedAt": null, "accessedAt": "2026-11-15T22:47:19+08:00", "accessStatus": "readable",
+    "platform": null, "accountHandle": null, "accountUrl": null, "identityCheck": null,
+    "supports": ["臺灣特色茶風味輪的六組分類", "清香型與焙香型的描述", "東方美人茶原料及製作特色", "杯泡與茶壺沖泡的不同情境"],
+    "limitations": ["教材署名 2024 年 9 月，無確切日期，不補造日數", "沖泡建議有器具與茶類條件，不套用所有商品", "僅整理文字知識，未重用插畫或照片"]
+  },
+  {
+    "id": "moa-flavor-wheel", "type": "official",
+    "title": "臺茶風味輪全員到齊 Fun轉臺茶春天", "author": "茶業改良場；刊於農業部食農教育資訊整合平臺",
+    "url": "https://fae.moa.gov.tw/theme_data.php?id=235&sub_theme=hot_news&theme=news",
+    "publishedAt": "2020-07-21", "accessedAt": "2026-11-15T22:47:19+08:00", "accessStatus": "readable",
+    "platform": null, "accountHandle": null, "accountUrl": null, "identityCheck": null,
+    "supports": ["臺灣六組特色茶風味輪的名稱與用途", "清香與焙香屬風味描述的閱讀脈絡"],
+    "limitations": ["頁面更新日期 2024-03-07；文中活動及統計為當時資訊，不作本週消息"]
+  },
+  {
+    "id": "teawei-longfengxia", "type": "professional",
+    "title": "龍鳳峽・杉林溪・114春商品頁", "author": "茗川茶葉",
+    "url": "https://www.teawei.com.tw/web/_pages/product/son.php?num=2256",
+    "publishedAt": null, "accessedAt": "2026-11-15T22:47:19+08:00", "accessStatus": "readable",
+    "platform": null, "accountHandle": null, "accountUrl": null, "identityCheck": null,
+    "supports": ["品牌以『杉林溪龍鳳峽』作為其商品的產地標示用語"],
+    "limitations": ["品牌第一手商業來源，非獨立地理調查；professional 為專案的業者來源分類，不代表官方認證", "發布日期不明，商品季別不能代替貼文發布日期", "不採其未獨立驗證的風味成因、排行、海拔、價格或發酵數值", "不作近七天社群貼文來源"]
+  },
+  {
+    "id": "school-tea-practice", "type": "official",
+    "title": "109 年食農教育推廣計畫教案：新北四季好食趣—尋茶趣", "author": "新北市立三民高級中學；農業部食農教育資訊整合平臺刊載",
+    "url": "https://fae.moa.gov.tw/files/TeachingPlan/860/A01_1.pdf",
+    "publishedAt": null, "accessedAt": "2026-11-15T22:47:19+08:00", "accessStatus": "readable",
+    "platform": null, "accountHandle": null, "accountUrl": null, "identityCheck": null,
+    "supports": ["必學泡茶術的杯泡用量示例為茶葉 3 公克、水 150 毫升", "依包裝建議及經驗調整沖泡條件"],
+    "limitations": ["封面為 109 年度成果，未見精確公開日期", "PDF 第 36 頁、印刷頁碼 53；為教學情境，不是所有茶的統一標準", "僅引用與本條目相關的比例及調整建議，未採入其他無關內容"]
+  },
+  {
+    "id": "moa-winter-harvest", "type": "official",
+    "title": "冬片仔知多少", "author": "農糧署；刊於食農教育資訊整合平臺",
+    "url": "https://fae.moa.gov.tw/theme_data.php?id=1783&sub_theme=knowledge&theme=topics",
+    "publishedAt": "2023-09-02", "accessedAt": "2026-11-15T22:47:19+08:00", "accessStatus": "readable",
+    "platform": null, "accountHandle": null, "accountUrl": null, "identityCheck": null,
+    "supports": ["冬茶採收季別用語", "冬茶與冬片的區別"],
+    "limitations": ["更新日期 2024-11-05；季節描述不證明示例商品的真實採收日期"]
+  }
+]

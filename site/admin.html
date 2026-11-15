@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-Hant" data-mode="local">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="茶名有解 TeaWIKI 管理工作台：保存來源、整理知識與維護 Wiki。">
+  <title>TeaWIKI｜知識管理工作台</title>
+  <link rel="stylesheet" href="./admin.css">
+  <script type="module" src="./admin-app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">跳到主要內容</a>
+  <aside class="sidebar" aria-label="管理導覽">
+    <a href="#dashboard" class="brand"><span class="brand-mark" aria-hidden="true">茶</span><span>茶名有解<small>TEAWIKI STUDIO</small></span></a>
+    <div class="workspace-label">知識管理工作台 <span>本機</span></div>
+    <nav id="navigation">
+      <a href="#dashboard" data-nav="dashboard"><span aria-hidden="true">◫</span>工作總覽</a>
+      <a href="#articles" data-nav="articles"><span aria-hidden="true">▤</span>知識條目</a>
+      <a href="#sources" data-nav="sources"><span aria-hidden="true">↥</span>來源與匯入<span class="nav-count" id="pending-count">0</span></a>
+      <a href="#health" data-nav="health"><span aria-hidden="true">✓</span>健康檢查</a>
+      <a href="#history" data-nav="history"><span aria-hidden="true">◷</span>操作紀錄</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="local-indicator"><i></i><span id="connection-label">連接本機資料庫</span></div>
+      <a href="#guide">使用說明 <span aria-hidden="true">↗</span></a>
+      <p>慢慢整理，讓每一份茶知識<br>都有可以回去的來源。</p>
+      <div class="admin-person"><span>管</span><div>Wiki 管理者<small>手動更新・來源可追溯</small></div></div>
+    </div>
+  </aside>
+  <div class="app-shell">
+    <header class="topbar"><div><span class="eyebrow">WORKSPACE</span><span id="breadcrumb">工作總覽</span></div><div class="topbar-right"><a id="public-preview" href="/preview/" target="_blank" rel="noopener">公開閱讀 ↗</a><span id="today"></span><span class="environment" id="environment">本機工作區</span><button type="button" id="owner-logout" class="btn text small" data-action="logout" hidden>登出</button></div></header>
+    <div id="demo-banner" class="demo-banner" hidden>這是公開展示版，可瀏覽內容。上傳與保存需在本機執行 <code>npm run admin</code>。</div>
+    <main id="content" tabindex="-1"><div class="loading-state"><span class="loading-dot"></span>正在讀取你的 Wiki…</div></main>
+    <footer class="app-footer"><span>茶名有解 / TeaWIKI</span><span>原始資料 → Wiki 知識 → 持續維護</span></footer>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <dialog id="version-dialog"><div class="dialog-heading"><h2>歷史版本</h2><button type="button" data-action="close-dialog" aria-label="關閉歷史版本">×</button></div><div id="version-list"></div></dialog>
+</body>
+</html>

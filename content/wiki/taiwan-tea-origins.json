@@ -1,0 +1,12 @@
+{
+  "kind": "wiki", "id": "taiwan-tea-origins",
+  "title": "茶名裡的地名，告訴你什麼？",
+  "summary": "先看茶從哪裡來，再分開看品種、製法與季節。",
+  "status": "published", "updated": "2026-11-15", "categoryId": "origins", "secondaryCategoryIds": [], "aliases": ["台灣茶產地", "茶區"],
+  "sections": [
+    { "heading": "產地，就是在回答『從哪裡來』", "paragraphs": ["茶名常把地名放進去。像文山包種茶、阿里山高山茶，都帶著地方資訊；這跟用哪個茶樹品種，是兩個問題。"], "bullets": [], "sourceIds": ["moa-tea-intro"] },
+    { "heading": "看茶單時，可以分兩次問", "paragraphs": ["假設你看到『阿里山・青心烏龍』：先把阿里山放進產地欄，再把青心烏龍放進品種欄。這是閱讀練習，不是在介紹某一款實際商品。"], "bullets": ["產地：這款茶標示來自哪裡？", "品種：它標示使用哪個品種？"], "sourceIds": ["moa-tea-intro", "ntsec-qingxin"] },
+    { "heading": "地名先當線索，別直接當完整履歷", "paragraphs": ["地名、季節和製法可以分開標示。看懂名稱後，再查看商品提供的資料；單一地名不能替你回答所有欄位。"], "bullets": [], "sourceIds": ["moa-tea-intro"] }
+  ],
+  "relatedIds": ["qingxin-oolong", "shanlinxi-qingxin-winter-example"], "sourceIds": ["moa-tea-intro", "ntsec-qingxin"]
+}

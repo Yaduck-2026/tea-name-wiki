@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "records": [
+    {
+      "path": "raw/references/moa-tea-intro-v1.md",
+      "sourceId": "moa-tea-intro",
+      "recordType": "reference-only",
+      "originalAvailable": false,
+      "sha256": "fbd1750e73ea69b0642aaff3ceab91d16bb1e918a2dabec35c9b5dfd526987dd"
+    },
+    {
+      "path": "raw/references/moa-tea-process-v1.md",
+      "sourceId": "moa-tea-process",
+      "recordType": "reference-only",
+      "originalAvailable": false,
+      "sha256": "059f54233f7108fab6ac55b5d9e0c679c005b497b81d0dce5e19c43a1216aa7b"
+    },
+    {
+      "path": "raw/references/ntsec-qingxin-v1.md",
+      "sourceId": "ntsec-qingxin",
+      "recordType": "reference-only",
+      "originalAvailable": false,
+      "sha256": "2f3c2eaaa6fc0018d83a0a1d8a1bc5705e8f2188a4f2c50240ec10cd0f24cf53"
+    },
+    {
+      "path": "raw/references/tbrs-taiwan-tea-handout-v1.md",
+      "sourceId": "tbrs-taiwan-tea-handout",
+      "recordType": "reference-only",
+      "originalAvailable": false,
+      "sha256": "5b737ea6e092bf50f71dbb98d1a7fc23cd6ca3b5e3243795846e6b399a6c3cc1"
+    },
+    {
+      "path": "raw/references/moa-flavor-wheel-v1.md",
+      "sourceId": "moa-flavor-wheel",
+      "recordType": "reference-only",
+      "originalAvailable": false,
+      "sha256": "fa5304d49bd331a6d047eea0c892cb1adce0b3811bd95aad6f788d264ca58f47"
+    },
+    {
+      "path": "raw/references/teawei-longfengxia-v1.md",
+      "sourceId": "teawei-longfengxia",
+      "recordType": "reference-only",
+      "originalAvailable": false,
+      "sha256": "543b780688f95fdd86abb87fa1301ae37ff5781b928fe33d1d3eb847b6164048"
+    },
+    {
+      "path": "raw/references/school-tea-practice-v1.md",
+      "sourceId": "school-tea-practice",
+      "recordType": "reference-only",
+      "originalAvailable": false,
+      "sha256": "050c471f20941ed639750eea81454ec7728c829999c8e7c945e99634f7bf8e29"
+    },
+    {
+      "path": "raw/references/moa-winter-harvest-v1.md",
+      "sourceId": "moa-winter-harvest",
+      "recordType": "reference-only",
+      "originalAvailable": false,
+      "sha256": "57e8b378ca4d07e424945f6e830210a47674e06326c7daac75de48d70f19c57f"
+    },
+    {
+      "path": "raw/articles/user-update-policy-v1.md",
+      "sourceId": "user-update-policy",
+      "recordType": "user-message",
+      "originalAvailable": true,
+      "sha256": "44a6c0e08f04c438de8a5d8967de1f304786be4783195065bf69c54e264a4193"
+    }
+  ]
+}

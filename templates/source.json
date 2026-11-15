@@ -1,0 +1,16 @@
+{
+  "id": "replace-source-id",
+  "type": "social",
+  "title": "待填：實際來源標題或貼文主題",
+  "author": "待填：作者、帳號名稱或機構",
+  "url": null,
+  "publishedAt": null,
+  "accessedAt": null,
+  "accessStatus": "pending",
+  "platform": null,
+  "accountHandle": null,
+  "accountUrl": null,
+  "identityCheck": null,
+  "supports": [],
+  "limitations": []
+}

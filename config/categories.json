@@ -1,0 +1,8 @@
+[
+  { "id": "origins", "label": "台灣產地" },
+  { "id": "cultivars", "label": "品種" },
+  { "id": "tea-types", "label": "茶類" },
+  { "id": "specialties", "label": "特色製法／茶款" },
+  { "id": "styles", "label": "製作風格" },
+  { "id": "brewing", "label": "沖泡" }
+]
