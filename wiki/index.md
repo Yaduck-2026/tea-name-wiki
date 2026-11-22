@@ -52,6 +52,7 @@ provenance: "local-index"
 - [TeaWIKI 什麼時候更新？](syntheses/manual-update-policy.md)：對話中手動觸發研究；網站搜尋不會啟動連外查找。
 - [問答示範：青心烏龍是品種，還是茶類？](syntheses/qingxin-vs-tea-type.md)：示範先讀索引，再用既有 Wiki 和來源回答並保存比較。
 - [11/8～11/15 社群觀察：這次資料還不夠判定熱門話題](syntheses/social-observation-2026-11-15.md)：這次公開搜尋沒取得能核對日期、原文和討論情況的合格樣本，先把限制說清楚。
+- [從茶名讀懂台灣茶](syntheses/tea-name-slides.md)：教學簡報：從一個茶名開始，認識台灣茶的產地、品種、風格、茶季、茶類與沖泡。
 
 ## 來源摘要
 

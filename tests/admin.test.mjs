@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import crypto from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { root } from '../scripts/wiki-lib.mjs';
 import { createAdminServer } from '../scripts/admin-server.mjs';
 import { buildSite } from '../scripts/build.mjs';
@@ -188,6 +189,77 @@ test('已退役原件：缺檔不列錯誤，但 hash、連結、狀態與格式
     delete record(notRetired).retired;
     writeManifest(notRetired);
     assert.ok(workspace.check(dir, false).errors.some(e => e.includes(`raw 檔案缺失：${rawPath}`)));
+  } finally { cleanFixture(dir); }
+});
+
+const deckPage = (slide3Cite = '依據：[青心烏龍](../cultivars/qingxin-oolong.md)。', id = 'test-slides') => `---
+id: "${id}"
+kind: "synthesis"
+title: "測試簡報"
+summary: "測試用簡報。"
+status: "published"
+updated: "2026-11-22"
+sources: []
+related: ["six-tea-types", "qingxin-oolong"]
+provenance: "wiki-query"
+synthesisType: "slide-deck"
+---
+
+# 測試簡報
+
+封面說明。
+
+## 第一張
+
+內容一。
+
+依據：[六大茶類](../tea-types/six-tea-types.md)。
+
+## 第二張
+
+內容二。
+
+${slide3Cite}
+
+## 維護註記
+
+這一段不是投影片，不需要依據。
+`;
+
+test('簡報頁：封面以外每張投影片都要有指向公開 Wiki 頁的依據', () => {
+  const dir = fixture();
+  try {
+    const workspace = createWorkspace(dir), deckFile = path.join(dir, 'wiki/syntheses/test-slides.md');
+    const slideErrors = () => workspace.check(dir, false).errors.filter(e => e.startsWith('test-slides:') && e.includes('投影片缺少依據'));
+    fs.writeFileSync(deckFile, deckPage());
+    assert.deepEqual(slideErrors(), []);
+
+    fs.writeFileSync(deckFile, deckPage('沒有依據的一句話。'));
+    assert.deepEqual(slideErrors(), ['test-slides: 投影片缺少依據（第 3 張：第二張）']);
+
+    fs.writeFileSync(deckFile, deckPage());
+    const target = path.join(dir, 'wiki/cultivars/qingxin-oolong.md');
+    fs.writeFileSync(target, fs.readFileSync(target, 'utf8').replace('status: "published"', 'status: "draft"'));
+    assert.deepEqual(slideErrors(), ['test-slides: 投影片缺少依據（第 3 張：第二張）']);
+  } finally { cleanFixture(dir); }
+});
+
+test('建置：簡報只輸出到 slides/，投影片連到讀者站文章', () => {
+  const dir = fixture();
+  try {
+    // Replace the real deck so only one deck exists and existing links to it stay valid.
+    fs.writeFileSync(path.join(dir, 'wiki/syntheses/tea-name-slides.md'), deckPage(undefined, 'tea-name-slides'));
+    execFileSync(process.execPath, [path.join(root, 'scripts/index.mjs'), '--write'], { env: { ...process.env, TEAWIKI_ROOT: dir } });
+    buildSite(dir);
+    for (const file of ['index.html', 'slides.js', 'slides.css']) assert.ok(fs.existsSync(path.join(dir, 'dist/slides', file)), file);
+    const deck = JSON.parse(fs.readFileSync(path.join(dir, 'dist/slides/deck.json'), 'utf8'));
+    assert.equal(deck.id, 'tea-name-slides');
+    assert.deepEqual(deck.slides.map(s => s.title), ['測試簡報', '第一張', '第二張']);
+    assert.equal(deck.slides[0].cover, true);
+    assert.match(deck.slides[1].html, /href="\.\.\/#article\/six-tea-types"/);
+    assert.ok(!JSON.stringify(deck).includes('維護註記'));
+    assert.ok(!fs.readFileSync(path.join(dir, 'dist/public-data.json'), 'utf8').includes('tea-name-slides'));
+    assert.ok(fs.readFileSync(path.join(dir, 'dist/reader.js'), 'utf8').includes('href="./slides/"'));
   } finally { cleanFixture(dir); }
 });
 

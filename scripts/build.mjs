@@ -9,7 +9,10 @@ export function buildSite(projectRoot = root, output = path.join(projectRoot, 'd
   const workspace = createWorkspace(projectRoot), check = workspace.check(projectRoot, true);
   if (!check.ok) throw new Error('公開建置檢查未通過：' + check.errors.join('；'));
   const all = listMarkdown(path.join(projectRoot, 'wiki')).map(readPage);
-  const allowed = all.filter(p => p.meta.status === 'published' && (['concept', 'tea-name'].includes(p.meta.kind) || (p.meta.kind === 'source' && p.meta.sourceType !== 'user-message') || (p.meta.kind === 'synthesis' && p.meta.evidenceLevel)));
+  const allowed = all.filter(p => p.meta.status === 'published' && p.meta.synthesisType !== 'slide-deck' && (['concept', 'tea-name'].includes(p.meta.kind) || (p.meta.kind === 'source' && p.meta.sourceType !== 'user-message') || (p.meta.kind === 'synthesis' && p.meta.evidenceLevel)));
+  // The teaching slide deck is published only under slides/, never as a reader article.
+  const decks = all.filter(p => p.meta.status === 'published' && p.meta.kind === 'synthesis' && p.meta.synthesisType === 'slide-deck');
+  if (decks.length > 1) throw new Error('目前只支援一份教學簡報：' + decks.map(p => p.meta.id).join('、'));
   const allowedIds = new Set(allowed.map(p => p.meta.id));
   const safePages = allowed.map(p => ({ id: p.meta.id, kind: p.meta.kind, title: p.meta.title, summary: p.meta.summary, status: 'published', updated: p.meta.updated, categoryId: p.meta.categoryId, aliases: p.meta.aliases ?? [], originalAvailable: p.meta.kind === 'source' ? p.meta.originalAvailable : undefined, path: path.relative(projectRoot, p.file).split(path.sep).join('/'), sources: (p.meta.sources ?? []).filter(id => allowedIds.has(id)), related: (p.meta.related ?? []).filter(id => allowedIds.has(id)) }));
   const files = new Map(allowed.map(p => [path.resolve(p.file), p.meta.id]));
@@ -23,6 +26,19 @@ export function buildSite(projectRoot = root, output = path.join(projectRoot, 'd
     return files.has(dest) ? `#article/${files.get(dest)}` : null;
   });
   const documents = allowed.map((p, i) => ({ ...safePages[i], body: publicBody(p), html: htmlFor(p) }));
+  // Each "## " section is one slide; the text before the first one is the cover.
+  const deckFor = p => ({
+    id: p.meta.id, title: p.meta.title, summary: p.meta.summary, updated: p.meta.updated,
+    slides: publicBody(p).trim().split(/\n(?=## )/).map((section, i) => ({
+      title: i ? section.split('\n')[0].replace(/^## /, '').trim() : p.meta.title,
+      cover: i === 0,
+      html: renderMarkdown(section, href => {
+        if (/^https?:\/\//i.test(href)) return href;
+        const dest = path.resolve(path.dirname(p.file), href.split('#')[0]);
+        return files.has(dest) ? `../#article/${files.get(dest)}` : null;
+      })
+    }))
+  });
   const categories = JSON.parse(fs.readFileSync(path.join(projectRoot, 'config/categories.json'), 'utf8'));
   const sourceDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../site');
   // Clear only known generated output after checking it remains inside the project.
@@ -38,6 +54,12 @@ export function buildSite(projectRoot = root, output = path.join(projectRoot, 'd
   for (const file of ['reader.js', 'reader.css']) fs.copyFileSync(path.join(sourceDir, file), path.join(resolved, file));
   fs.copyFileSync(path.join(sourceDir, 'reader.html'), path.join(resolved, 'index.html'));
   fs.copyFileSync(path.join(projectRoot, 'AGENTS.md'), path.join(resolved, 'AGENTS.md'));
+  if (decks.length) {
+    fs.mkdirSync(path.join(resolved, 'slides'));
+    fs.writeFileSync(path.join(resolved, 'slides/deck.json'), JSON.stringify(deckFor(decks[0])));
+    fs.copyFileSync(path.join(sourceDir, 'slides.html'), path.join(resolved, 'slides/index.html'));
+    for (const file of ['slides.js', 'slides.css']) fs.copyFileSync(path.join(sourceDir, file), path.join(resolved, 'slides', file));
+  }
   console.log(`公開網站已建置：${allowed.length} 頁內容；管理展示為唯讀，不含 raw、草稿或備份。`);
   return { output: resolved, count: allowed.length };
 }

@@ -80,3 +80,11 @@ provenance: "operation-log"
 - 衝突：採收次數「每年 7 次」（逗陣來識茶）與「約 4 至 5 次」（冬片仔知多少）兩說並列；製程簡介「八大特色茶類」卻只列六項，以實際列出者為準。
 - 未採用：教案的健康說法與成分釋出比較、業者頁的「芬多精、活氧」成因與海拔、價格、排行。
 - 限制：原文只代表 2026-11-22 當時的網頁版本；業者頁只支持產地寫法；raw/articles 只存在本機、不進 GitHub。check：22 頁、17 筆封存、0 errors、0 warnings。
+
+## [2026-11-22] query | 產生教學簡報「從茶名讀懂台灣茶」
+
+- 目的：作業要求以 Wiki 為知識來源製作教學型 HTML 簡報（使用者經 OpenSpec 變更 add-teaching-slides 確認範圍）。
+- 讀取：[索引](index.md)、[茶名示例](tea-names/shanlinxi-qingxin-winter-example.md)、[茶名裡的地名](origins/taiwan-tea-origins.md)、[青心烏龍](cultivars/qingxin-oolong.md)、[清香型、焙香型](styles/light-and-roasted-styles.md)、[六大茶類](tea-types/six-tea-types.md)、[東方美人](specialties/oriental-beauty.md)、[沖泡入門](brewing/brewing-basics.md)，以及 8 頁來源摘要的標題與範圍。
+- 回存：[教學簡報：從茶名讀懂台灣茶](syntheses/tea-name-slides.md)，synthesisType 為 slide-deck，共 15 張；每張以「依據」連到 Wiki 頁。另在[總覽](overview.md)加上入口說明。
+- 核對：60 個關鍵說法逐一對照引用頁，全部有依據；未加入 Wiki 以外的知識、療效或商品推薦。
+- 限制：簡報是 Wiki 的再整理，不是新的查證；茶名為教學組合示例。未連網、未搜尋新資料。check：23 頁、0 errors、0 warnings。

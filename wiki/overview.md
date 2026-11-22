@@ -35,6 +35,8 @@ provenance: "migration-synthesis"
 
 每次匯入資料，先找它會影響哪些既有頁面，再整理來源、修訂條目和關聯，最後更新[索引](index.md)及[操作紀錄](log.md)。這是本專案採用的維護約定。
 
+查詢 Wiki 的成果也可以回存成新頁。例如[教學簡報：從茶名讀懂台灣茶](syntheses/tea-name-slides.md)就是 AI 讀過索引與相關頁之後整理出來的，網站上可從首頁的「看教學簡報」開啟。
+
 研究只在手動要求時啟動，詳見[更新政策](syntheses/manual-update-policy.md)及[使用者指示](sources/user-update-policy.md)。
 
 ## 目前的證據限制

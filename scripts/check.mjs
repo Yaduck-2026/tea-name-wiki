@@ -88,6 +88,19 @@ for (const p of pages) {
     if (!fs.existsSync(path.join(root, o.researchFile ?? ''))) fail(`${m.id}: 研究紀錄不存在`);
   }
 }
+// Slide decks: every slide after the cover must cite a published concept, tea-name or source page.
+for (const p of pages.filter(p => p.meta.synthesisType === 'slide-deck')) {
+  const slides = p.body.replace(/\n## 維護註記\n[^]*/, '\n').split(/\n(?=## )/).slice(1);
+  slides.forEach((slide, i) => {
+    const cited = [...slide.matchAll(/\]\(([^)]+)\)/g)].some(([, href]) => {
+      if (/^[a-z]+:/i.test(href) || href.startsWith('#')) return false;
+      let target;
+      try { target = files.get(path.resolve(path.dirname(p.file), decodeURIComponent(href.split('#')[0]))); } catch { return false; }
+      return target && ['concept', 'tea-name', 'source'].includes(target.meta.kind) && target.meta.status === 'published';
+    });
+    if (!cited) fail(`${p.meta.id}: 投影片缺少依據（第 ${i + 2} 張：${slide.split('\n')[0].replace(/^## /, '')}）`);
+  });
+}
 if (!index) fail('缺 index.md');
 for (const p of pages) {
   if (p.meta.kind !== 'index' && !indexed.has(p.meta.id)) fail(`${p.meta.id}: 索引漏頁`);
