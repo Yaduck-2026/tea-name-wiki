@@ -4,7 +4,7 @@ kind: "index"
 title: "TeaWIKI 知識索引"
 summary: "所有 Wiki 頁面的一句摘要與分類入口。"
 status: "published"
-updated: "2026-11-16"
+updated: "2026-11-22"
 sources: []
 related: []
 provenance: "local-index"
@@ -25,11 +25,11 @@ provenance: "local-index"
 
 ## 品種
 
-- [青心烏龍：先認識品種，再看做成什麼茶](cultivars/qingxin-oolong.md)：名字有『烏龍』，這裡卻是在說茶樹品種，別和茶類混在一起。
+- [青心烏龍：先認識品種，再看做成什麼茶](cultivars/qingxin-oolong.md)：名字有「烏龍」，這裡卻是在說茶樹品種，別和茶類混在一起。
 
 ## 茶類
 
-- [六大茶類入門：先看怎麼做，別只猜茶湯顏色](tea-types/six-tea-types.md)：綠、白、黃、青、紅、黑是一套茶類入口；台灣特色茶風味輪則是另一套閱讀工具。
+- [六大茶類入門：名稱看顏色，分辨靠製程](tea-types/six-tea-types.md)：綠、白、黃、青、紅、黑依成品色澤與湯色命名，要分辨則看製程；台灣特色茶的六類風味輪是另一套分類。
 
 ## 特色製法／茶款
 
@@ -55,13 +55,13 @@ provenance: "local-index"
 
 ## 來源摘要
 
-- [臺茶風味輪全員到齊 Fun轉臺茶春天](sources/moa-flavor-wheel.md)：既有來源的用途與限制；原文尚未封存。
-- [逗陣來識茶](sources/moa-tea-intro.md)：既有來源的用途與限制；原文尚未封存。
-- [臺灣特色茶分類及加工製程簡介](sources/moa-tea-process.md)：既有來源的用途與限制；原文尚未封存。
-- [冬片仔知多少](sources/moa-winter-harvest.md)：既有來源的用途與限制；原文尚未封存。
-- [青心烏龍](sources/ntsec-qingxin.md)：既有來源的用途與限制；原文尚未封存。
-- [109 年食農教育推廣計畫教案：新北四季好食趣—尋茶趣](sources/school-tea-practice.md)：既有來源的用途與限制；原文尚未封存。
-- [國產農漁畜產品教材：臺灣茶（2024 年 9 月版）](sources/tbrs-taiwan-tea-handout.md)：既有來源的用途與限制；原文尚未封存。
-- [龍鳳峽・杉林溪・114春商品頁](sources/teawei-longfengxia.md)：既有來源的用途與限制；原文尚未封存。
+- [臺茶風味輪全員到齊 Fun轉臺茶春天](sources/moa-flavor-wheel.md)：茶改場新聞：配合 CNS 修訂，台灣特色茶分六類並建立風味輪，各類主要風味方向。
+- [逗陣來識茶](sources/moa-tea-intro.md)：食農教育平臺的台灣茶入門：五種分類方法、採茶季節表、五大茶區、大小葉種與焙火。
+- [臺灣特色茶分類及加工製程簡介](sources/moa-tea-process.md)：茶改場維護的製程簡介：兩套茶葉分類、六大茶類製程、發酵度參考範圍與九項加工目的。
+- [冬片仔知多少](sources/moa-winter-harvest.md)：農糧署圖卡：冬茶是立冬前後採收，冬片是冬茶之後暖冬再發的嫩芽。
+- [青心烏龍](sources/ntsec-qingxin.md)：科教館茶園的品種介紹：青心烏龍的特徵、生長條件與常見成茶類別。
+- [109 年食農教育推廣計畫教案：新北四季好食趣—尋茶趣](sources/school-tea-practice.md)：國中九年級食農教案：台灣茶史、六大茶類學習單，以及熱泡、茶包與冷泡的操作數字。
+- [國產農漁畜產品教材：臺灣特色茶（2024 年 9 月出版）](sources/tbrs-taiwan-tea-handout.md)：茶改場兩頁式教材：六類特色茶與風味輪、高山茶定義、東方美人與著蜒、杯泡與茶壺泡法。
+- [龍鳳峽・杉林溪・114春商品頁](sources/teawei-longfengxia.md)：茗川茶葉的商品頁；只用來說明「杉林溪龍鳳峽」作為產地標示的寫法。
 - [使用者的手動更新指示](sources/user-update-policy.md)：直接訊息要求手動發出搜尋指示後才更新 TeaWIKI。
 

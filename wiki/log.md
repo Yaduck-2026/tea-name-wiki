@@ -68,3 +68,15 @@ provenance: "operation-log"
 - 修改[來源摘要](sources/user-update-policy.md)：originalAvailable 改為 false、移除原件連結並說明退役；摘要、[更新政策](syntheses/manual-update-policy.md)與總覽內容不變。
 - 本紀錄上方 2026-11-15 ingest 條目的原件連結保留原樣，不改寫歷史；該連結已無法開啟。
 - 限制：原始訊息全文已無法重讀，日後只能依來源摘要理解當時的指示。check 嚴格模式 0 errors。
+
+## [2026-11-22] ingest | 重新取得並匯入 8 份外部來源原文
+
+- 授權：使用者明確授權連網重抓既有 8 份來源；未搜尋其他來源。
+- 取得：2026-11-22T14:40:18+08:00 下載，8 份皆 HTTP 200。原件存於 raw/articles/*-v2（6 份 HTML、2 份 PDF），manifest 追加 8 筆 web-capture 紀錄與 SHA-256；v1 定位紀錄保留不改。
+- 來源：[逗陣來識茶](sources/moa-tea-intro.md)、[冬片仔知多少](sources/moa-winter-harvest.md)、[特色茶分類及加工製程](sources/moa-tea-process.md)、[臺茶風味輪](sources/moa-flavor-wheel.md)、[青心烏龍](sources/ntsec-qingxin.md)、[尋茶趣教案](sources/school-tea-practice.md)、[茶改場教材](sources/tbrs-taiwan-tea-handout.md)、[業者商品頁](sources/teawei-longfengxia.md)。8 頁來源摘要改寫為原文日期、重點、支持範圍與限制，originalAvailable 改為 true。
+- 閱讀與核對：抽出原文文字，由 4 個子代理逐份比對現有 Wiki 說法並附原文行號／頁碼；主要結論與所有新寫入的數字由主流程回到原文抽查確認。
+- 修正：[六大茶類](tea-types/six-tea-types.md)原標題「別只猜茶湯顏色」與原文「依色澤及湯色分類」有落差，已改寫；[東方美人](specialties/oriental-beauty.md)「著蜒」段原本引用的逗陣來識茶沒有此說法，改只引茶改場教材；[青心烏龍](cultivars/qingxin-oolong.md)補上原本漏列的條形包種茶；[問答示範](syntheses/qingxin-vs-tea-type.md)同步修正六大茶類說法。
+- 補充：[沖泡入門](brewing/brewing-basics.md)加入茶壺法時間、茶量、水溫與冷泡比例；[清香型、焙香型](styles/light-and-roasted-styles.md)加入生茶／熟茶；[茶名裡的地名](origins/taiwan-tea-origins.md)加入五大茶區與高山茶定義；[茶名示例](tea-names/shanlinxi-qingxin-winter-example.md)加入冬茶時間、冬片區別；[總覽](overview.md)更新證據限制。
+- 衝突：採收次數「每年 7 次」（逗陣來識茶）與「約 4 至 5 次」（冬片仔知多少）兩說並列；製程簡介「八大特色茶類」卻只列六項，以實際列出者為準。
+- 未採用：教案的健康說法與成分釋出比較、業者頁的「芬多精、活氧」成因與海拔、價格、排行。
+- 限制：原文只代表 2026-11-22 當時的網頁版本；業者頁只支持產地寫法；raw/articles 只存在本機、不進 GitHub。check：22 頁、17 筆封存、0 errors、0 warnings。

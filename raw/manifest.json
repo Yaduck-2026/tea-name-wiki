@@ -67,6 +67,94 @@
         "date": "2026-11-22",
         "reason": "使用者表示此原件不再使用；原件已不在本機，保留路徑與 SHA-256 作為歷史紀錄。"
       }
+    },
+    {
+      "path": "raw/articles/moa-tea-intro-v2.html",
+      "sourceId": "moa-tea-intro",
+      "recordType": "web-capture",
+      "originalAvailable": true,
+      "sha256": "1575158dd63df2746f42d47eaff3904039c708e5c696ffdbac3827c6149bbdbd",
+      "capturedAt": "2026-11-22T14:40:18+08:00",
+      "url": "https://fae.moa.gov.tw/theme_data.php?id=50&sub_theme=knowledge&theme=topics",
+      "contentType": "text/html",
+      "bytes": 171473
+    },
+    {
+      "path": "raw/articles/moa-flavor-wheel-v2.html",
+      "sourceId": "moa-flavor-wheel",
+      "recordType": "web-capture",
+      "originalAvailable": true,
+      "sha256": "7a933bbcf50bfa52841b7402a85bd99a63a93e3ad77559d6326d60cbad3335ab",
+      "capturedAt": "2026-11-22T14:40:18+08:00",
+      "url": "https://fae.moa.gov.tw/theme_data.php?id=235&sub_theme=hot_news&theme=news",
+      "contentType": "text/html",
+      "bytes": 150510
+    },
+    {
+      "path": "raw/articles/moa-tea-process-v2.html",
+      "sourceId": "moa-tea-process",
+      "recordType": "web-capture",
+      "originalAvailable": true,
+      "sha256": "0b4fcce8822bcc6b5a9d207b8e272fd9023bc460bbc4634db7959d4f5cd96a44",
+      "capturedAt": "2026-11-22T14:40:18+08:00",
+      "url": "https://kmweb.moa.gov.tw/subject/subject.php?id=50853&print=Y",
+      "contentType": "text/html",
+      "bytes": 10665
+    },
+    {
+      "path": "raw/articles/moa-winter-harvest-v2.html",
+      "sourceId": "moa-winter-harvest",
+      "recordType": "web-capture",
+      "originalAvailable": true,
+      "sha256": "eb8e23258a0f9b77865999cce43e7eeb587d737ea13d5d2abeb39e34757ddf9d",
+      "capturedAt": "2026-11-22T14:40:18+08:00",
+      "url": "https://fae.moa.gov.tw/theme_data.php?id=1783&sub_theme=knowledge&theme=topics",
+      "contentType": "text/html",
+      "bytes": 151311
+    },
+    {
+      "path": "raw/articles/ntsec-qingxin-v2.html",
+      "sourceId": "ntsec-qingxin",
+      "recordType": "web-capture",
+      "originalAvailable": true,
+      "sha256": "6a9dc0a3f62d97e7a6f0276b6eba586caa4e289926587e4342dee4ca35c9d351",
+      "capturedAt": "2026-11-22T14:40:18+08:00",
+      "url": "https://www.ntsec.gov.tw/article/detail.aspx?a=5456",
+      "contentType": "text/html",
+      "bytes": 280775
+    },
+    {
+      "path": "raw/articles/school-tea-practice-v2.pdf",
+      "sourceId": "school-tea-practice",
+      "recordType": "web-capture",
+      "originalAvailable": true,
+      "sha256": "bc35440323f6c03a3ad163ff0160a10eff06258fb7e2838a211d00120d28fe2c",
+      "capturedAt": "2026-11-22T14:40:18+08:00",
+      "url": "https://fae.moa.gov.tw/files/TeachingPlan/860/A01_1.pdf",
+      "contentType": "application/pdf",
+      "bytes": 1912832
+    },
+    {
+      "path": "raw/articles/tbrs-taiwan-tea-handout-v2.pdf",
+      "sourceId": "tbrs-taiwan-tea-handout",
+      "recordType": "web-capture",
+      "originalAvailable": true,
+      "sha256": "ebdab1298c17a40ed26b76d76386da6816cdb7c03e42b31319dd25fd16bbb3bc",
+      "capturedAt": "2026-11-22T14:40:18+08:00",
+      "url": "https://fae.moa.gov.tw/files/topics/3032/A02_2.pdf",
+      "contentType": "application/pdf",
+      "bytes": 8752586
+    },
+    {
+      "path": "raw/articles/teawei-longfengxia-v2.html",
+      "sourceId": "teawei-longfengxia",
+      "recordType": "web-capture",
+      "originalAvailable": true,
+      "sha256": "666ef7015a093fdf9f97ad12b3fd9150f03f0e6f96fbffefde3dd47910bd049a",
+      "capturedAt": "2026-11-22T14:40:18+08:00",
+      "url": "https://www.teawei.com.tw/web/_pages/product/son.php?num=2256",
+      "contentType": "text/html",
+      "bytes": 66792
     }
   ]
 }

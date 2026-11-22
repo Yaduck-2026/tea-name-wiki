@@ -4,7 +4,7 @@ kind: "overview"
 title: "從一個茶名開始讀懂茶"
 summary: "把產地、品種、製法與風格分開看，再沿關聯查知識。"
 status: "published"
-updated: "2026-11-15"
+updated: "2026-11-22"
 sources: ["moa-tea-intro", "ntsec-qingxin", "user-update-policy"]
 related: ["taiwan-tea-origins", "qingxin-oolong", "six-tea-types", "oriental-beauty", "light-and-roasted-styles", "brewing-basics", "shanlinxi-qingxin-winter-example", "manual-update-policy"]
 provenance: "migration-synthesis"
@@ -41,7 +41,7 @@ provenance: "migration-synthesis"
 
 近期話題入口：[11/8～11/15 公開社群觀察](syntheses/social-observation-2026-11-15.md)。本次資料不足，未判定熱門話題；保留當時期間，不自動當作新一週資料。
 
-舊版查證內容已遷移；八筆外部來源只有網址與先前查閱紀錄，沒有原文封存。本輪沒有重讀外部原文，不能把格式遷移當成新查證。各[來源摘要](index.md)保留限制與原始連結。
+八筆外部來源已於 2026-11-22 重新取得原文、封存並逐份閱讀，相關知識頁依原文修正與補充；各[來源摘要](index.md)列出原文日期、支持範圍與限制。這代表這些頁面的引用已和原文核對，不代表官方背書，也不是商品鑑定。其中一份是業者商品頁，只用來說明產地寫法。
 
 ## 知識來源
 

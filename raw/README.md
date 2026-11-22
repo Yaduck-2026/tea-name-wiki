@@ -6,7 +6,9 @@
 - social/：實際取得的社群資料；未取得不建立假貼文。
 - references/：只有連結與既有 metadata 的紀錄，不是原文。
 
-目前八個外部來源只保存 reference-only 定位紀錄；沒有其全文或 PDF。articles/user-update-policy-v1.md 保存使用者先前訊息，為專案需求來源，非茶知識來源。此次未重新對外讀取茶資料。
+2026-11-22 依使用者授權重新取得八個外部來源，原件存為 articles/*-v2.html／.pdf（recordType: web-capture）；references/*-v1.md 為先前的定位紀錄，保留作歷史。articles/user-update-policy-v1.md（使用者先前訊息）已於同日退役，manifest 保留其路徑與 hash。
+
+articles/ 不提交 GitHub，只存在本機；請另外備份，否則遺失後無法還原，只能再次退役或重新取得。
 
 Markdown 摘要放 wiki/sources/，不要寫入本層冒充原文。不要為了讓檢查通過而改舊 hash。若封存有誤，新增更正紀錄及新版本，保留歷史。
 

@@ -4,7 +4,7 @@ kind: "synthesis"
 title: "問答示範：青心烏龍是品種，還是茶類？"
 summary: "示範先讀索引，再用既有 Wiki 和來源回答並保存比較。"
 status: "published"
-updated: "2026-11-15"
+updated: "2026-11-22"
 sources: ["ntsec-qingxin", "moa-tea-process"]
 related: ["qingxin-oolong", "six-tea-types"]
 provenance: "wiki-query-demo"
@@ -25,13 +25,13 @@ synthesisType: "query-demo"
 
 ## 為什麼要分開？
 
-品種是在看原料身分，六大茶類則用製作處理等線索理解成茶。不要把兩種分類揉在同一欄。
+品種是在看原料身分；六大茶類的名稱則依成茶的色澤與湯色而來，要分辨時看的是製作處理。兩者描述的是不同的事，不要把兩種分類揉在同一欄。
 
 依據：[六大茶類入門](../tea-types/six-tea-types.md)、[製程資料摘要](../sources/moa-tea-process.md)。
 
 ## 這個答案的限制
 
-上述解釋不驗證任何實際茶品；外部原文尚未封存，本次沿用舊查閱紀錄，不宣稱重新核對官方頁面。
+上述解釋不驗證任何實際茶品。2026-11-15 示範當時外部原文尚未封存；2026-11-22 已重新取得原文並核對，依原文修正「六大茶類」的說法，其餘回答不變。
 
 ## 相關條目
 
