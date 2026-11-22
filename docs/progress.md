@@ -168,3 +168,10 @@
 - 規格依原 AGENTS.md 第 1、2、10～12 節改寫，情境（Scenario）為需求的具體化，尚未逐條對照程式驗證。
 - `openspec validate --specs --strict` 5／5 通過。本輪未修改茶知識內容、程式或網站。
 - 同輪檢查：npm test 11／11 通過；npm run check 嚴格模式 3 errors，原因是 raw/articles/user-update-policy-v1.md 本機不存在（已在 .gitignore，不在 git 中），check --public 0 errors。尚未處理，待使用者決定找回原件或記錄遺失。
+
+## Git 身分設定與推送｜2026-11-22
+
+- 本機原無 git 身分。依使用者指定，本 repo 設定 user.name 為 Yaduck-2026；使用者要求隱藏信箱，user.email 改用 GitHub noreply 信箱，既有 commit 均未含真實信箱。
+- 首次推送被拒（403）：本機 Git 與 gh 登入的是另一個 GitHub 帳號，對本 Repository 沒有寫入權限。未新增協作者；改將遠端網址加上 Yaduck-2026 帳號名稱，由使用者本人在瀏覽器登入後推送。
+- 推送成功：遠端 main 為 832324c（OpenSpec 導入），以 git ls-remote 核對與本機一致。
+- 公開網站尚未重新部署：workflow 只能手動執行，本輪未觸發，也未核對 Pages 設定與上線結果。
