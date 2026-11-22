@@ -7,6 +7,9 @@ context: |
   Project: 茶名有解｜TeaWIKI，台灣茶 Markdown 知識庫與靜態閱讀網站。
   Tech: Node.js 20+，只用內建模組，無外部 npm 套件；scripts/ 為工具，site/ 為前端。
   Wiki 內容維護規則見 AGENTS.md；OpenSpec 只管產品與軟體需求，不寫茶知識內容規則。
+  開發紀錄以 change 保存（提案、任務與驗證結果），docs/progress.md 已凍結為歷史，不再追加。
+  Wiki 內容操作（ingest、query、lint、原件退役）仍追加在 wiki/log.md，不建立 change。
+  AGENTS.md 不可加入任何指向 OpenSpec 的內容（使用者要求）。
 
 # Per-artifact rules (optional)
 # Add custom rules for specific artifacts.

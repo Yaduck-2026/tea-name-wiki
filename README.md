@@ -26,7 +26,7 @@ Windows 雙擊 [run-admin.cmd](run-admin.cmd)，再開啟 [http://127.0.0.1:4318
 - [AGENTS.md](AGENTS.md)：AI 維護 Wiki 的規則。
 - [openspec/specs/](openspec/specs/)：產品、網站、發布、管理介面與權限的需求規格（OpenSpec）。新功能變更用 `/opsx:propose` 提案。
 - [內容指南](docs/content-guide.md)、[任務指令](docs/ai-prompts.md)。
-- [遷移結果](docs/migration-v2.md)、[製作進度](docs/progress.md)。
+- [遷移結果](docs/migration-v2.md)、[製作進度](docs/progress.md)（至 2026-11-22 的歷史紀錄，之後的開發紀錄在 openspec/changes）。
 
 ## 如何操作
 

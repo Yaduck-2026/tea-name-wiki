@@ -13,6 +13,9 @@ for (const file of listMarkdown()) {
 const ids = new Map(), files = new Map(pages.map(p => [path.resolve(p.file), p]));
 const categories = JSON.parse(fs.readFileSync(path.join(root, 'config/categories.json'), 'utf8')).map(c => c.id);
 const kinds = ['concept', 'tea-name', 'source', 'synthesis', 'overview', 'index', 'log'];
+const manifest = JSON.parse(fs.readFileSync(path.join(root, 'raw/manifest.json'), 'utf8'));
+// Retired originals are intentionally no longer kept; their path and hash stay as history.
+const retiredPaths = new Set(manifest.records.filter(r => r.retired).map(r => r.path));
 for (const p of pages) {
   const m = p.meta, name = path.relative(root, p.file);
   if (!/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/.test(m.id ?? '') || path.basename(p.file, '.md') !== m.id) fail(`${name}: ID／檔名不符`);
@@ -51,6 +54,11 @@ for (const p of pages) {
     const targetFile = path.resolve(path.dirname(p.file), href);
     const within = path.relative(root, targetFile);
     if (within.startsWith('..') || path.isAbsolute(within)) { fail(`${m.id}: 連結超出專案 ${href}`); continue; }
+    if (retiredPaths.has(within.split(path.sep).join('/'))) {
+      // Only the append-only log may keep historical links to retired originals.
+      if (m.kind !== 'log') fail(`${m.id}: 連結指向已退役原件 ${href}`);
+      continue;
+    }
     if (!fs.existsSync(targetFile)) {
       if (publicCheckout && within.startsWith('raw' + path.sep)) continue;
       fail(`${m.id}: 連結不存在 ${href}`); continue;
@@ -68,7 +76,8 @@ for (const p of pages) {
     if (!Array.isArray(m.rawRefs) || !m.rawRefs.length || typeof m.originalAvailable !== 'boolean') fail(`${m.id}: 缺 rawRefs／originalAvailable`);
     if (!['official', 'social', 'professional', 'research', 'user-message', 'user-document'].includes(m.sourceType)) fail(`${m.id}: 來源類型錯誤`);
     if (!['user-message', 'user-document'].includes(m.sourceType) && !/^https?:\/\//.test(m.url ?? '')) fail(`${m.id}: 缺外部來源網址`);
-    if (!m.originalAvailable) warnings.push(`${m.id}: 只有來源定位紀錄，原文未封存。`);
+    const allRetired = Array.isArray(m.rawRefs) && m.rawRefs.length > 0 && m.rawRefs.every(ref => retiredPaths.has(ref));
+    if (!m.originalAvailable && !allRetired) warnings.push(`${m.id}: 只有來源定位紀錄，原文未封存。`);
   }
   if (m.evidenceLevel === 'insufficient-data') {
     if (!m.observation?.limitations?.length || !m.observation?.researchFile) fail(`${m.id}: 缺觀察限制`);
@@ -84,13 +93,17 @@ for (const p of pages) {
   if (p.meta.kind !== 'index' && !indexed.has(p.meta.id)) fail(`${p.meta.id}: 索引漏頁`);
   if (!['index', 'log', 'overview'].includes(p.meta.kind) && incoming.get(p.meta.id) === 0) warnings.push(`${p.meta.id}: 除索引外沒有入鏈（孤立頁）。`);
 }
-const manifest = JSON.parse(fs.readFileSync(path.join(root, 'raw/manifest.json'), 'utf8'));
 const rawRecords = new Map();
 for (const record of manifest.records) {
   const file = path.resolve(root, record.path);
   if (rawRecords.has(record.path) || !path.relative(root, file).startsWith('raw' + path.sep)) { fail(`raw 路徑重複或不合法：${record.path}`); continue; }
   rawRecords.set(record.path, record);
+  if (record.retired !== undefined) {
+    const r = record.retired, validDate = typeof r?.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(r.date) && Number.isFinite(Date.parse(r.date + 'T00:00:00Z')) && new Date(r.date + 'T00:00:00Z').toISOString().slice(0, 10) === r.date;
+    if (!validDate || typeof r?.reason !== 'string' || !r.reason.trim()) fail(`raw 退役資訊不合法（需 date 與 reason）：${record.path}`);
+  }
   if (!fs.existsSync(file)) {
+    if (record.retired) continue;
     if (publicCheckout && /^raw\/(articles|social)\//.test(record.path)) { warnings.push(`公開副本未含本地原件：${record.path}`); continue; }
     fail(`raw 檔案缺失：${record.path}`); continue;
   }
@@ -99,7 +112,8 @@ for (const record of manifest.records) {
 for (const p of pages.filter(p => p.meta.kind === 'source')) {
   for (const ref of p.meta.rawRefs ?? []) {
     const record = rawRecords.get(ref);
-    if (!record || record.sourceId !== p.meta.id || record.originalAvailable !== p.meta.originalAvailable) fail(`${p.meta.id}: raw manifest 與來源資訊不一致`);
+    // originalAvailable on the source page means "currently obtainable"; retired originals are not.
+    if (!record || record.sourceId !== p.meta.id || (record.originalAvailable && !record.retired) !== p.meta.originalAvailable) fail(`${p.meta.id}: raw manifest 與來源資訊不一致`);
   }
 }
 const oldHashes = JSON.parse(fs.readFileSync(path.join(root, 'docs/legacy/json-v1/original-hashes.json'), 'utf8'));

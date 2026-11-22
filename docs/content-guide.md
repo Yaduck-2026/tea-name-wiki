@@ -56,13 +56,15 @@ provenance: "new-ingest"
 
 ## 原件與來源摘要
 
-raw/ 保存版本，不改寫封存。rawRefs 是相對專案根目錄的 raw 檔案路徑，必須在 raw/manifest.json 中。originalAvailable 只有實際保存原始文件或使用者原訊息才 true；連結紀錄必須 false。
+raw/ 保存版本，不改寫封存。rawRefs 是相對專案根目錄的 raw 檔案路徑，必須在 raw/manifest.json 中。originalAvailable 表示目前能否取得原件：實際保存原始文件或使用者原訊息才 true；連結紀錄及已退役的原件必須 false。
 
-來源摘要的 sourceType 為 official、social、research、professional、user-message 或 user-document。外部來源 url 必填原始頁面；本地使用者訊息或上傳資料可 null，但要連到本地原件。rawRefs 本地可閱讀，網站建置不直接公開。
+來源摘要的 sourceType 為 official、social、research、professional、user-message 或 user-document。外部來源 url 必填原始頁面；本地使用者訊息或上傳資料可 null，但要連到本地原件（已退役者除外）。rawRefs 本地可閱讀，網站建置不直接公開。
 
 source 頁正文記作者、查閱／發布日期、外部原文、用途、差異與限制。社群補平台、帳號、原貼文與身分確認情形。基礎知識不必硬加無關社群帳號。
 
 八筆遷移來源只有舊 metadata，不是已保存原文。原查閱時間照留，不因遷移重設成新查證時間。新版本另存；manifest 可追加新紀錄，不改舊 hash。
+
+不再使用的原件以「退役」處理，不刪紀錄：manifest 該筆保留 path 與 sha256，加上 `"retired": {"date": "YYYY-MM-DD", "reason": "..."}`；來源頁 originalAvailable 改 false、移除原件連結並在正文說明退役日期與原因；log 追加退役紀錄，舊紀錄中的原件連結保留。check 對已退役原件的缺檔不列錯誤，檔案若仍在照樣核對 hash；除 log 外的頁面連到已退役原件會列錯誤。
 
 ## 近期觀察
 
@@ -85,7 +87,7 @@ log 本文只追加：日期、migration／ingest／query／lint／correction、
 
 ## 新增資料流程
 
-先讀 index → 保存來源版本 → 整理 source 摘要 → 找既有頁整合 → 記錄矛盾與限制 → 補連結 → 更新 overview（需要時）、index、log → 執行 check → 更新 progress 與討論。
+先讀 index → 保存來源版本 → 整理 source 摘要 → 找既有頁整合 → 記錄矛盾與限制 → 補連結 → 更新 overview（需要時）、index、log → 執行 check。
 
 結構通過不等於事實查證。後續網站建置只讀 Wiki，排除 draft、raw、research 與舊 JSON。
 
@@ -95,7 +97,7 @@ log 本文只追加：日期、migration／ingest／query／lint／correction、
 
 保存時自動重整 index 並追加 log；管理者仍需核對正文來源及例子。index／log 可連到內部草稿，但不輸出到公開站。公開站另排除專案政策、示範問答和使用者訊息來源。
 
-公開 Repository 不包含本地原件時，check --public 會保留缺檔提醒；不是將 originalAvailable 改成 false 或重算 hash 掩蓋資料遺失。實際在場的原件仍驗證 hash。管理者需另備份 raw 和 .local。
+公開 Repository 不包含本地原件時，check --public 會保留缺檔提醒；未在 manifest 標記退役時，不能將 originalAvailable 改成 false 或重算 hash 掩蓋資料遺失。實際在場的原件仍驗證 hash。管理者需另備份 raw 和 .local。
 
 ## 圖片
 

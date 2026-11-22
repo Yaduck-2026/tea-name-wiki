@@ -8,6 +8,7 @@ import { root } from '../scripts/wiki-lib.mjs';
 import { createAdminServer } from '../scripts/admin-server.mjs';
 import { buildSite } from '../scripts/build.mjs';
 import { renderMarkdown } from '../scripts/markdown.mjs';
+import { createWorkspace } from '../scripts/workspace.mjs';
 
 export function fixture() {
   const dir = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), 'teawiki-admin-test-'));
@@ -135,6 +136,56 @@ test('管理 API：封存、草稿、編輯、版本衝突、還原、完成整�
     assert.equal(workspace.check(dir, false).ok, false);
     assert.ok(buildSite(dir).count > 0);
   });
+});
+
+test('已退役原件：缺檔不列錯誤，但 hash、連結、狀態與格式仍受檢查', () => {
+  const dir = fixture();
+  try {
+    const workspace = createWorkspace(dir);
+    const rawPath = 'raw/articles/user-update-policy-v1.md';
+    const manifestFile = path.join(dir, 'raw/manifest.json'), pageFile = path.join(dir, 'wiki/sources/user-update-policy.md');
+    const readManifest = () => JSON.parse(fs.readFileSync(manifestFile, 'utf8'));
+    const writeManifest = m => fs.writeFileSync(manifestFile, JSON.stringify(m, null, 2) + '\n');
+    const record = m => m.records.find(r => r.path === rawPath);
+    // Put the fixture into the retired state regardless of the current repository state.
+    const m0 = readManifest();
+    record(m0).retired ??= { date: '2026-11-22', reason: '測試：不再使用' };
+    writeManifest(m0);
+    fs.writeFileSync(pageFile, fs.readFileSync(pageFile, 'utf8').replace('originalAvailable: true', 'originalAvailable: false').replace(/\[([^\]]+)\]\([^)]*raw\/articles\/user-update-policy-v1\.md\)/g, '$1'));
+    fs.rmSync(path.join(dir, rawPath), { force: true });
+    const baselineManifest = fs.readFileSync(manifestFile), baselinePage = fs.readFileSync(pageFile);
+    const restore = () => { fs.writeFileSync(manifestFile, baselineManifest); fs.writeFileSync(pageFile, baselinePage); fs.rmSync(path.join(dir, rawPath), { force: true }); };
+
+    const strict = workspace.check(dir, false);
+    assert.equal(strict.ok, true, strict.errors.join('\n'));
+    assert.ok(!strict.warnings.some(w => w.startsWith('user-update-policy:')));
+    assert.equal(workspace.check(dir, true).ok, true);
+    assert.equal(record(readManifest()).sha256, record(JSON.parse(fs.readFileSync(path.join(root, 'raw/manifest.json'), 'utf8'))).sha256);
+
+    fs.mkdirSync(path.dirname(path.join(dir, rawPath)), { recursive: true });
+    fs.writeFileSync(path.join(dir, rawPath), '內容不同的檔案');
+    assert.ok(workspace.check(dir, false).errors.some(e => e.includes('raw 封存被修改')));
+    restore();
+
+    fs.appendFileSync(pageFile, `\n[原件](../../${rawPath})\n`);
+    assert.ok(workspace.check(dir, false).errors.some(e => e.startsWith('user-update-policy: 連結指向已退役原件')));
+    restore();
+
+    fs.writeFileSync(pageFile, fs.readFileSync(pageFile, 'utf8').replace('originalAvailable: false', 'originalAvailable: true'));
+    assert.ok(workspace.check(dir, false).errors.some(e => e.includes('raw manifest 與來源資訊不一致')));
+    restore();
+
+    const badFormat = readManifest();
+    record(badFormat).retired = { date: '2026-13-40', reason: '' };
+    writeManifest(badFormat);
+    assert.ok(workspace.check(dir, false).errors.some(e => e.includes('退役資訊不合法')));
+    restore();
+
+    const notRetired = readManifest();
+    delete record(notRetired).retired;
+    writeManifest(notRetired);
+    assert.ok(workspace.check(dir, false).errors.some(e => e.includes(`raw 檔案缺失：${rawPath}`)));
+  } finally { cleanFixture(dir); }
 });
 
 test('Markdown 預覽不執行原始 HTML、危險連結或圖片事件', () => {

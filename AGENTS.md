@@ -1,6 +1,6 @@
 # 茶名有解｜TeaWIKI 的 AI 協作規則
 
-本文件是 schema，規定 AI 如何維護 tea-name-wiki 的 Wiki。先讀本文件、README.md、docs/content-guide.md、docs/progress.md，再讀 wiki/index.md 找相關頁。使用者最新指示優先；規則變更須同步模板、指南及檢查器。
+本文件是 schema，規定 AI 如何維護 tea-name-wiki 的 Wiki。先讀本文件、README.md、docs/content-guide.md，再讀 wiki/index.md 找相關頁。使用者最新指示優先；規則變更須同步模板、指南及檢查器。
 
 ## 1. 知識庫與寫作原則
 
@@ -16,11 +16,11 @@
 - 建置、檔案檢查、排版、既有資料遷移不觸發社群研究。
 - 使用者提供資料並要求整理，可匯入該資料；不擴張成搜尋其他來源的授權。
 - 問答先用 Wiki；缺資料時說明缺口，等使用者授權才對外查找。
-- 每次討論同步 docs/progress.md 與外層 ../茶知識Wiki-討論與確認.md；單獨取得本專案時，外層檔不存在就只記 progress。
 
 ## 3. 三層與唯一主檔
 
 - raw/：收錄來源的版本。原件、使用者訊息、擷取與僅連結紀錄分清楚；一經封存不改寫。新增版本另建檔並追加 raw/manifest.json 的 SHA-256，不重算舊檔 hash 掩蓋修改。
+- 不再使用的原件可退役：manifest 該筆保留路徑與 SHA-256，加上 retired（date、reason），不刪除紀錄。對應來源頁 originalAvailable 改 false 並移除原件連結；log 舊紀錄的連結保留不改寫，另追加退役紀錄。未標記退役的原件遺失仍是錯誤。
 - wiki/：AI 維護的 Markdown，是知識唯一主檔。修改概念時整合已有頁面，不一直堆同義摘要；內容須能追到來源及相關頁。
 - AGENTS.md、templates/*.md、docs/content-guide.md：規則與格式。
 - config/ 與圖片出處仍可用 JSON；搜尋資料及網站由 Wiki 生成，不人工維護第二份內容。

@@ -4,7 +4,7 @@ kind: "log"
 title: "TeaWIKI 操作紀錄"
 summary: "依時間追加 ingest、query、lint 與更正的紀錄。"
 status: "published"
-updated: "2026-11-16"
+updated: "2026-11-22"
 sources: []
 related: ["index"]
 provenance: "operation-log"
@@ -60,3 +60,11 @@ provenance: "operation-log"
 - 自動測試 11／11、Chrome 13 類互動通過；測試密碼只用在隔離副本。公開版無寫入 API。
 - [權限設計](../docs/access-control.md)、[操作說明](../docs/admin-guide.md)。GitHub 實際 owner／協作者權限仍待上架時確認。
 - 新版服務重啟後，實測未登入管理讀取及寫入回應 401，公開預覽仍可閱讀；正式密碼尚待本人設定。
+
+## [2026-11-22] maintenance | 使用者訊息原件退役
+
+- 退役檔案：raw/articles/user-update-policy-v1.md（2026-11-15 ingest 時封存）。使用者表示不再使用，原件也已不在本機。
+- raw/manifest.json 該紀錄加註 retired（日期、原因），路徑與 SHA-256 不變；未刪除紀錄、未重算 hash。
+- 修改[來源摘要](sources/user-update-policy.md)：originalAvailable 改為 false、移除原件連結並說明退役；摘要、[更新政策](syntheses/manual-update-policy.md)與總覽內容不變。
+- 本紀錄上方 2026-11-15 ingest 條目的原件連結保留原樣，不改寫歷史；該連結已無法開啟。
+- 限制：原始訊息全文已無法重讀，日後只能依來源摘要理解當時的指示。check 嚴格模式 0 errors。

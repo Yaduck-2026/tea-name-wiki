@@ -1,5 +1,7 @@
 # 製作進度
 
+> 本檔已於 2026-11-22 停止更新，保留為歷史紀錄。之後的開發規格與紀錄見 [openspec/](../openspec/)：需求在 openspec/specs，每次變更的提案、任務與驗證在 openspec/changes（完成後封存於 openspec/changes/archive）。Wiki 內容操作仍記在 [wiki/log.md](../wiki/log.md)。
+
 更新日期：2026-11-16。
 
 ## 已確認的專案

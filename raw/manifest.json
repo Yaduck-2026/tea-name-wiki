@@ -62,7 +62,11 @@
       "sourceId": "user-update-policy",
       "recordType": "user-message",
       "originalAvailable": true,
-      "sha256": "44a6c0e08f04c438de8a5d8967de1f304786be4783195065bf69c54e264a4193"
+      "sha256": "44a6c0e08f04c438de8a5d8967de1f304786be4783195065bf69c54e264a4193",
+      "retired": {
+        "date": "2026-11-22",
+        "reason": "使用者表示此原件不再使用；原件已不在本機，保留路徑與 SHA-256 作為歷史紀錄。"
+      }
     }
   ]
 }

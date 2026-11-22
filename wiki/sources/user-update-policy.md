@@ -4,13 +4,13 @@ kind: "source"
 title: "使用者的手動更新指示"
 summary: "直接訊息要求手動發出搜尋指示後才更新 TeaWIKI。"
 status: "published"
-updated: "2026-11-15"
+updated: "2026-11-22"
 sources: []
 related: ["manual-update-policy", "overview"]
 provenance: "user-message-ingest"
 sourceType: "user-message"
 url: null
-originalAvailable: true
+originalAvailable: false
 rawRefs: ["raw/articles/user-update-policy-v1.md"]
 ---
 
@@ -18,11 +18,13 @@ rawRefs: ["raw/articles/user-update-policy-v1.md"]
 
 ## 原始資料
 
-[已封存的使用者訊息](../../raw/articles/user-update-policy-v1.md)來自協作對話；收錄於 2026-11-15，保留原字詞。這是專案規則來源，不是可引用來證明茶知識的資料。
+使用者訊息來自協作對話；收錄於 2026-11-15，當時封存原件並記錄 SHA-256。這是專案規則來源，不是可引用來證明茶知識的資料。
+
+原件已於 2026-11-22 退役：使用者表示不再使用，原件也已不在本機。raw/manifest.json 仍保留該紀錄的路徑與 SHA-256 作為歷史；以下整理內容不受影響。
 
 ## 重點與解讀
 
-只有使用者要求搜尋時，才依規則查找、整理並更新 TeaWIKI；不做背景自動更新。訊息中的錯字保留在原件，這裡只整理意思。
+只有使用者要求搜尋時，才依規則查找、整理並更新 TeaWIKI；不做背景自動更新。訊息中的錯字原本保留在原件，這裡只整理意思。
 
 ## 影響哪些頁面
 
