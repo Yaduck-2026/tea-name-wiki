@@ -34,7 +34,7 @@ Windows 雙擊 [run-admin.cmd](run-admin.cmd)，再開啟 [http://127.0.0.1:4318
 2. 你提問，AI 先讀索引及相關頁回答；明確要求存回時，才保存為比較或綜合頁。
 3. 你要求檢查，AI 做結構檢查與內容檢視，留下未解決問題。
 
-不自動更新、不定期排程。站內搜尋及本地指令不對外找資料；新研究仍須手動要求。首版沒有網站模型聊天，不需 API 金鑰。Obsidian 可選，不是必要依賴。
+茶內容不自動更新、不定期排程（網站部署會在推送後自動進行，見下方「公開與資料界線」）。站內搜尋及本地指令不對外找資料；新研究仍須手動要求。首版沒有網站模型聊天，不需 API 金鑰。Obsidian 可選，不是必要依賴。
 
 ## 本地指令
 
@@ -65,4 +65,4 @@ Windows 雙擊 [run-admin.cmd](run-admin.cmd)，再開啟 [http://127.0.0.1:4318
 
 raw 原件預設不提交 GitHub，也不自動放入網站；發布前另做範圍審查。網站只輸出可公開 Wiki 與必要資產，來源頁提供整理及外部連結，不公開本地原件路徑。
 
-GitHub Repository：[Yaduck-2026/tea-name-wiki](https://github.com/Yaduck-2026/tea-name-wiki)，已由使用者建立並上傳。公開網站：[yaduck-2026.github.io/tea-name-wiki](https://yaduck-2026.github.io/tea-name-wiki/)，由 .github/workflows/pages.yml 手動執行測試、建置與 Pages 發布；推送不會自動更新網站。上傳以本資料夾為根目錄，不包含外層 ai-study-garden 草稿。
+GitHub Repository：[Yaduck-2026/tea-name-wiki](https://github.com/Yaduck-2026/tea-name-wiki)，已由使用者建立並上傳。公開網站：[yaduck-2026.github.io/tea-name-wiki](https://yaduck-2026.github.io/tea-name-wiki/)，由 .github/workflows/pages.yml 在推送到 main 時自動測試、建置並發布 Pages（也可在 Actions 手動執行）；任一步失敗就不部署，線上維持上一版。上傳以本資料夾為根目錄，不包含外層 ai-study-garden 草稿。

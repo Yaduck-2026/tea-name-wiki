@@ -156,9 +156,12 @@ test('已退役原件：缺檔不列錯誤，但 hash、連結、狀態與格式
     const baselineManifest = fs.readFileSync(manifestFile), baselinePage = fs.readFileSync(pageFile);
     const restore = () => { fs.writeFileSync(manifestFile, baselineManifest); fs.writeFileSync(pageFile, baselinePage); fs.rmSync(path.join(dir, rawPath), { force: true }); };
 
+    // Other originals under raw/articles are not in the public repository (CI), so only
+    // assert that nothing about the retired original is reported.
     const strict = workspace.check(dir, false);
-    assert.equal(strict.ok, true, strict.errors.join('\n'));
-    assert.ok(!strict.warnings.some(w => w.startsWith('user-update-policy:')));
+    const aboutRetired = m => m.includes(rawPath) || m.startsWith('user-update-policy:');
+    assert.deepEqual(strict.errors.filter(aboutRetired), []);
+    assert.ok(!strict.warnings.some(aboutRetired));
     assert.equal(workspace.check(dir, true).ok, true);
     assert.equal(record(readManifest()).sha256, record(JSON.parse(fs.readFileSync(path.join(root, 'raw/manifest.json'), 'utf8'))).sha256);
 

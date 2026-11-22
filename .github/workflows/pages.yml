@@ -1,7 +1,10 @@
 name: Test and publish TeaWIKI
 
-# Only a manual action builds and publishes; this never researches new content.
+# Builds and publishes on every push to main, or when run manually as a fallback.
+# No schedule; this never researches or reorganizes content.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:

@@ -50,11 +50,11 @@
 
 1. 登入 GitHub，建立公開 Repository，將上述專案完整上傳並保留 .github/workflows/pages.yml。
 2. Repository 的 Settings → Pages，將發布來源選為 GitHub Actions。
-3. Actions → Test and publish TeaWIKI → Run workflow，手動執行。
+3. 推送到 main 分支即自動執行；需要重新部署或排錯時，也可在 Actions → Test and publish TeaWIKI → Run workflow 手動執行。
 4. 工作流程先測試與檢查，再建置 dist，最後部署 Pages。
 5. 等 GitHub 顯示成功，再以實際回傳網址開啟公開首頁及 admin/ 展示頁。
 
-workflow 僅在手動啟動時運作，不做新茶搜尋，也不設週期更新。之後本機修改 Wiki，需將可公開變更上傳並手動重新執行工作流程。
+workflow 在推送到 main 或手動執行時運作，不做新茶搜尋，也不設週期更新。之後本機修改 Wiki，只要把可公開變更推送到 main，網站就會自動更新；測試、檢查或建置任一步失敗時不會部署，線上維持上一版。（2026-11-22 起，此前只能手動執行。）
 
 一般專案站可能使用帳號網域加 Repository 子路徑；本專案資產及資料使用相對路徑，不寫死帳號。正式網址以 GitHub 的實際部署結果為準。
 
@@ -67,7 +67,7 @@ workflow 僅在手動啟動時運作，不做新茶搜尋，也不設週期更�
 ## 本人管理權限
 
 - 使用個人帳號擁有的 Repository，不新增其他寫入協作者；一般訪客可以閱讀公開檔案，但不能直接修改原倉庫。
-- workflow 保持手動，並驗證執行者等於 repository_owner。組織倉庫的 owner 是組織名稱，不能直接套用此條件，若改用組織需另指定允許的使用者。
+- workflow 由推送 main 或手動執行觸發，兩種方式都驗證執行者等於 repository_owner。組織倉庫的 owner 是組織名稱，不能直接套用此條件，若改用組織需另指定允許的使用者。
 - 本機管理頁需密碼登入；.local/admin-auth.json、原件、版本與工作階段不部署。前端程式碼不能放密碼或 GitHub 權杖。
 - 此時尚未建立遠端 Repository，因此沒有宣稱已檢查 GitHub 實際協作者、授權或帳號安全設定。
 
