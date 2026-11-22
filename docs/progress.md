@@ -160,3 +160,11 @@
 020620 截圖顯示可攜 Git 2.56.1 已成功安裝、遠端空倉庫 clone 成功；發布停在 Local GitHub credentials（exit 129），原因為 Windows PowerShell 傳遞含空白及內嵌引號的 helper 程式路徑時拆錯參數。已改為使用程序 PATH 中的 gh，設定 !gh auth git-credential，僅作用於隔離 clone。
 
 已用實際 Git 初始化隔離測試倉庫，執行同一憑證指令並讀回完全一致值，成功退出。另將公開封裝實際 add／commit／clone 後檢查：22 Wiki 頁、9 raw 紀錄，0 errors／9 warnings；16 頁公開建置通過，封存與舊檔 hash 保持一致。發布腳本語法檢查通過。遠端 push 與 Pages 尚未執行，需重新開啟原 publish-teawiki.cmd；沿用已安裝 Git。
+
+## 導入 OpenSpec 需求規格管理｜2026-11-22
+
+- 使用者要求以 OpenSpec 管理需求，維持本機 1.14.3；以 `openspec init --tools claude --language zh-TW` 初始化，產生 openspec/ 與 .claude/ 的 opsx 指令與技能，初始化未改動 AGENTS.md。
+- 依使用者確認的切分：產品、網站、發布、管理介面與權限需求移到 openspec/specs 的 product-scope、public-site、publishing、admin-console、owner-access（共 37 項需求）；AGENTS.md 回到 Wiki 維護 schema（寫作、操作邊界、三層、格式、ingest、query、lint、社群查證、茶名拆解），依使用者要求不含指向 OpenSpec 的內容。
+- 規格依原 AGENTS.md 第 1、2、10～12 節改寫，情境（Scenario）為需求的具體化，尚未逐條對照程式驗證。
+- `openspec validate --specs --strict` 5／5 通過。本輪未修改茶知識內容、程式或網站。
+- 同輪檢查：npm test 11／11 通過；npm run check 嚴格模式 3 errors，原因是 raw/articles/user-update-policy-v1.md 本機不存在（已在 .gitignore，不在 git 中），check --public 0 errors。尚未處理，待使用者決定找回原件或記錄遺失。

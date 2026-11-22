@@ -1,21 +1,19 @@
 # 茶名有解｜TeaWIKI 的 AI 協作規則
 
-本文件是 schema，適用於整個 tea-name-wiki 專案。先讀本文件、README.md、docs/content-guide.md、docs/progress.md，再讀 wiki/index.md 找相關頁。使用者最新指示優先；規則變更須同步模板、指南及檢查器。
+本文件是 schema，規定 AI 如何維護 tea-name-wiki 的 Wiki。先讀本文件、README.md、docs/content-guide.md、docs/progress.md，再讀 wiki/index.md 找相關頁。使用者最新指示優先；規則變更須同步模板、指南及檢查器。
 
-## 1. 目標與已確認需求
+## 1. 知識庫與寫作原則
 
 以台灣茶為主的繁體中文知識庫，介紹六大茶類，從完整茶名拆解連到知識。參考 Karpathy 的 LLM Wiki 模式，以持續整合的 Markdown Wiki 為內容主檔；公開網站只是閱讀介面。原文參考與遷移歷程見 docs/karpathy-architecture-plan.md。
 
-- 六大導覽依 config/categories.json 固定為：台灣產地 origins、品種 cultivars、茶類 tea-types、特色製法／茶款 specialties、製作風格 styles、沖泡 brewing。
-- 首頁以完整茶名拆解與六大分類為主，另設近期話題。至少各分類一篇基礎知識、一個茶名示例及關於／查證方法。
+- 主分類依 config/categories.json：台灣產地 origins、品種 cultivars、茶類 tea-types、特色製法／茶款 specialties、製作風格 styles、沖泡 brewing。
 - 白話口語，專有名詞初次出現先解釋再舉例。保留正確名詞；比喻不能當定義或查證證據。教學情境要說明是示例，不編造商品或經歷。
-- 茶文化雜誌風：米白、深茶綠、茶褐、大標題與留白，共用版型，手機及鍵盤可用。
-- 不加入即時模型聊天、會員或商城；不需要模型 API 金鑰。
+- 每次工作回報改動、實際檢查及限制。新增內容只改來源、Wiki、索引和紀錄。
 
 ## 2. 手動操作邊界
 
 - 使用者明確要求搜尋、查找新來源或更新茶內容時才連外研究；不自動排程、不因開站或資料變舊而重查。
-- 訪客站內搜尋只查既有公開內容。建置、檔案檢查、排版、既有資料遷移不觸發社群研究。
+- 建置、檔案檢查、排版、既有資料遷移不觸發社群研究。
 - 使用者提供資料並要求整理，可匯入該資料；不擴張成搜尋其他來源的授權。
 - 問答先用 Wiki；缺資料時說明缺口，等使用者授權才對外查找。
 - 每次討論同步 docs/progress.md 與外層 ../茶知識Wiki-討論與確認.md；單獨取得本專案時，外層檔不存在就只記 progress。
@@ -41,7 +39,7 @@ wiki/ 下放 index.md、overview.md、log.md，以及 sources/、六個分類資
 - AI 核對引用、範圍、例子與格式後可完成複核，記錄結果；不另加使用者逐篇批准關卡。
 - sources 是 wiki/sources/ 的來源 ID；related 是已存在 Wiki ID。公開頁只指向公開 Wiki 頁，不自我引用或重複。使用標準相對 Markdown 連結，不靠只有某一編輯器支援的語法。
 - 段落後以相對連結指明支持來源，文末列知識來源。不要只填 metadata 而看不出哪段依據何處。
-- source 頁保存外部網址、作者、查閱時間、來源性質、支持範圍、限制及 rawRefs；摘要不放 raw 冒充原件。
+- source 頁保存外部網址、作者、查閱時間、來源性質、支持範圍、限制及 rawRefs；摘要不放 raw 冒充原件。使用者上傳的文件 sourceType 為 user-document，url 可為 null。
 - 概念至少三節、至少一個具體例子；無法確認的結論留待查證，不為湊篇數補寫。
 - 舊資料遷移保留原查閱日期，標示 legacy-migration；不把轉檔日期當成重新查證日期。
 
@@ -55,6 +53,8 @@ wiki/ 下放 index.md、overview.md、log.md，以及 sources/、六個分類資
 6. 更新 index：所有 Wiki 頁各有一個連結和一句摘要，依類別排列；檢查來回可走的關聯。
 7. 在 log 追加 ingest 條目，列來源、修改頁、主要結論、衝突與限制。失敗也記錄已完成及未完成部分，不留半套索引。
 8. 執行 npm run check；內容複核與結構檢查分開回報。不因單次命令成功就宣稱外部知識正確。
+
+管理介面上傳只建立原件、來源草稿與待整理工作，不等於 ingest 完成；須閱讀原件後依上列步驟整合，不捏造摘要或查證結果。
 
 ## 6. query：問答與回存
 
@@ -93,41 +93,3 @@ wiki/ 下放 index.md、overview.md、log.md，以及 sources/、六個分類資
 示例「杉林溪龍鳳峽・青心烏龍・清香型・冬茶」依序為產地、品種、製作風格、採收季節。季節作標籤，不增加第七個主分類。每個詞的依據要能追溯。
 
 exampleType 為 illustrative 或 source-based，公開頁明示。verified 是詞語角色已具來源，不是整款茶品驗證；不從沒寫出的資訊猜海拔、茶類、製程、香氣、品質或沖泡數字。白話翻譯說「冬茶季」，不保證為曆法冬季。無真實同名商品資料時維持教學組合。
-
-## 10. 網站與交付
-
-後續從 published Wiki 建置靜態網站，Node.js 20 以上，共用 HTML/CSS/JavaScript，輸出 dist/。不由 dist 回寫 Wiki。build／preview 在實作後才可宣稱可執行；package.json 為實際指令依據。
-
-- 支援專案子路徑部署，內部連結由同一映射產生，Markdown 路徑轉公開頁面；不把本機 raw 路徑直接曝露。
-- 公開輸出採白名單，只納入允許公開的 Wiki 與資產；排除 raw、research、備份、草稿與私有資料。GitHub 上傳前同樣檢查，公開網站與公開 Repository 的範圍分開處理。
-- source 頁可公開整理摘要及外部連結，原件不因來源頁公開就連帶公開；source 的 rawRefs 僅供本地維護。
-- 保留文末來源、茶名示例限制、相關條目、清楚焦點、表單標籤及搜尋無結果提示。
-- 圖片出處與授權存 assets/image-credits.json，無使用依據的社群圖不用；原創／生成圖標示示意。
-- about 提供規則、AI 協作流程及實際 AGENTS.md 可讀入口。
-
-每次工作回報改動、實際檢查及限制。新增內容應只改來源、Wiki、索引和紀錄，沿用共用版型。上傳 GitHub／部署時不提交金鑰，以實際成功結果及網址交付，不把預期網址說成已上線。
-
-## 11. 本機管理介面（使用者新增需求）
-
-- npm run admin 啟動 127.0.0.1 的管理服務；不改為公開監聽，不將本地寫檔 API 部署到 GitHub Pages。網站首版仍不含模型聊天或自動研究。
-- 管理者可手動上傳 MD、TXT、PDF、CSV、JSON（單檔最多 10 MB），建立 immutable 原件、source 草稿與待整理工作。sourceType 可為 user-document，url 可 null；這種來源允許公開的是經複核摘要，不是原件。
-- 上傳不等於 ingest 已完成。沒有模型／OCR 整理功能，不捏造摘要、查證或 AI 完成狀態；管理者或協作 AI 需閱讀原件並整合知識。
-- 管理者可編輯概念、茶名、綜合整理及來源摘要；來源原件不可修改或刪除，index／log 不開放任意覆寫。
-- 保存先在暫存副本檢查，再序列化提交，保留 .local/history 舊版並檢查版本衝突；失敗不能留下半套 Wiki。公開狀態需管理者明確勾選內容複核，仍不代表外部事實保證。
-- 勾選來源及相關條目時可以補相對連結，不能自動補造事實段落。整理工作需來源及至少一篇引用知識可公開才標完成。
-- 管理工作、版本備份及測試成果存 .local/，不提交 GitHub。原件下載由本地服務按 source ID 與 manifest 核對，不提供任意檔案路徑讀取。
-- 本地檢查嚴格模式將遺失原件列錯誤；公開副本可用 check --public，僅對被忽略的 articles／social 原件缺失列提醒，存在的原件仍要核對 hash。管理服務使用此可攜模式，不隱藏缺檔問題。
-- npm run build 只輸出白名單內容與唯讀 admin 展示：已公開概念、茶名、非 user-message 來源摘要及具有 evidenceLevel 的觀察綜合頁。排除 raw、research、log、內部政策、示範問答、草稿及備份；移除指向非公開檔案的維護連結。
-- 管理介面的「產生公開版本」僅重建 dist，不上傳或部署。GitHub 工作流程亦由 workflow_dispatch 手動啟動，不做內容搜尋或自動整理。
-- 管理流程變動需同步 API／失敗回復測試；可用時跑真實瀏覽器上傳及保存測試。不得用假的成功提示代替實際檔案結果。
-
-使用方式見 docs/admin-guide.md，測試結果見 docs/admin-test-report.md；網站是否已上線仍以 progress 及實際部署結果為準。
-
-## 12. 本人管理權限
-
-- 使用者指定僅本人可上傳、編輯，其餘訪客唯讀。公開版本不部署寫入 API；前端停用按鈕不是權限驗證，不把管理密碼或 GitHub 權杖嵌入靜態檔。
-- 本機管理 API 必須通過密碼工作階段驗證；開啟首頁不能直接取得管理權。第一次由本人在本機設定密碼，不由 AI 代設、猜測或要求在聊天傳密碼。
-- 密碼以 scrypt 加獨立 salt 存 .local/admin-auth.json；僅存雜湊、不記錄輸入。工作階段 HttpOnly、SameSite=Strict、最多八小時，登出及服務重啟失效；登入失敗需有暫時限制。
-- 原件、管理資料、版本及所有寫入 API 均受保護；僅登入狀態／首次設定／登入流程可在本機未登入時進行。保留 Origin、Host 及跨來源檢查。
-- 本人控制本機 Windows 帳號與檔案為前提，這不是雲端身分服務。若需公開網址登入寫入，先確認部署與驗證方式，不把本機服務直接對外暴露。
-- 發布至個人 Repository 時不新增其他寫入協作者，手動 workflow 限 actor 等於 repository_owner；沒有遠端連線查核前不得聲稱已完成 GitHub 權限設定。
