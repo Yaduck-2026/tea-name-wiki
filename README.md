@@ -6,7 +6,7 @@
 
 已依確認的 Karpathy LLM Wiki 方案完成本地架構遷移：raw 來源版本、wiki 知識主檔、AGENTS.md 維護規則。已遷移 8 份內容與 8 個外部來源紀錄，並以使用者提供的更新訊息示範匯入及本地問答回存。
 
-**本機管理網頁與公開閱讀站已製作並測試，尚未上傳 GitHub 或部署。** 八份外部原文尚未封存；製作網站不代表已重新查證。
+**本機管理網頁與公開閱讀站已製作並測試，公開閱讀站已部署至 GitHub Pages。** 八份外部原文尚未封存；製作網站不代表已重新查證。
 
 ## 開啟管理工作台
 
@@ -65,4 +65,4 @@ Windows 雙擊 [run-admin.cmd](run-admin.cmd)，再開啟 [http://127.0.0.1:4318
 
 raw 原件預設不提交 GitHub，也不自動放入網站；發布前另做範圍審查。網站只輸出可公開 Wiki 與必要資產，來源頁提供整理及外部連結，不公開本地原件路徑。
 
-GitHub Repository：[Yaduck-2026/tea-name-wiki](https://github.com/Yaduck-2026/tea-name-wiki)，已由使用者建立；專案上傳尚未完成。公開網站：尚未部署。.github/workflows/pages.yml 已準備手動測試、建置與 Pages 發布流程，遠端尚未執行。上傳以本資料夾為根目錄，不包含外層 ai-study-garden 草稿。
+GitHub Repository：[Yaduck-2026/tea-name-wiki](https://github.com/Yaduck-2026/tea-name-wiki)，已由使用者建立並上傳。公開網站：[yaduck-2026.github.io/tea-name-wiki](https://yaduck-2026.github.io/tea-name-wiki/)，由 .github/workflows/pages.yml 手動執行測試、建置與 Pages 發布；推送不會自動更新網站。上傳以本資料夾為根目錄，不包含外層 ai-study-garden 草稿。

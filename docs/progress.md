@@ -175,3 +175,11 @@
 - 首次推送被拒（403）：本機 Git 與 gh 登入的是另一個 GitHub 帳號，對本 Repository 沒有寫入權限。未新增協作者；改將遠端網址加上 Yaduck-2026 帳號名稱，由使用者本人在瀏覽器登入後推送。
 - 推送成功：遠端 main 為 832324c（OpenSpec 導入），以 git ls-remote 核對與本機一致。
 - 公開網站尚未重新部署：workflow 只能手動執行，本輪未觸發，也未核對 Pages 設定與上線結果。
+
+## 公開網站上線核對｜2026-11-22
+
+- 更正先前「尚未部署」的狀態：使用者截圖顯示 workflow #1 已於 2026-11-15 由 Yaduck-2026 手動執行成功（commit 658d740），網站自當時起已上線。
+- 使用者再手動執行 workflow，2026-11-22 執行成功，部署 commit d280cb4（以 gh run list 核對）。
+- 正式網址：https://yaduck-2026.github.io/tea-name-wiki/ 。實測首頁、public-data.json（16 頁）、AGENTS.md、admin/、reader.js 均回應 HTTP 200；線上 AGENTS.md 已是只含第 1～9 節的新版。
+- 公開範圍抽查：openspec/、.claude/、raw/manifest.json、wiki/log.md 在網站上均為 404，未被輸出。
+- 未做瀏覽器互動或手機版面的線上測試；網站上線不代表茶知識已重新查證。
