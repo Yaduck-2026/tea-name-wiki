@@ -44,6 +44,14 @@ function slideElement(slide) {
       if (slide.image.caption) figure.append(el('figcaption', '', slide.image.caption));
     }
     article.classList.add(body.textContent.trim() ? 'has-image' : 'image-only');
+    // Leading paragraphs before a table become a full-width lead above the image and table.
+    const first = body.firstElementChild;
+    if (first?.tagName === 'P' && body.querySelector('.table-scroll')) {
+      const lead = el('div', 'slide-lead');
+      while (body.firstElementChild?.tagName === 'P') lead.append(body.firstElementChild);
+      article.classList.add('has-lead');
+      article.append(lead);
+    }
     article.append(figure);
   }
   if (body.textContent.trim()) article.append(body);
@@ -51,10 +59,23 @@ function slideElement(slide) {
   return article;
 }
 
+// In the two-column lead layout, stretch the table to the image height so both line up.
+const wide = matchMedia('(min-width: 761px)');
+function alignTable() {
+  const article = stage.querySelector('.slide.has-lead');
+  const table = article?.querySelector('.slide-body table'), img = article?.querySelector('.slide-figure img');
+  if (!table || !img) return;
+  table.style.height = '';
+  if (wide.matches && img.complete && img.naturalWidth) table.style.height = `${img.getBoundingClientRect().height}px`;
+}
+addEventListener('resize', alignTable);
+
 function show(index, focus) {
   current = clamp(index);
   const slide = deck.slides[current];
   stage.replaceChildren(slideElement(slide));
+  const leadImage = stage.querySelector('.slide.has-lead .slide-figure img');
+  if (leadImage) { leadImage.addEventListener('load', alignTable); alignTable(); }
   const total = deck.slides.length;
   counter.textContent = `第 ${current + 1} 張，共 ${total} 張`;
   bar.style.width = `${((current + 1) / total) * 100}%`;

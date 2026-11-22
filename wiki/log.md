@@ -105,3 +105,8 @@ provenance: "operation-log"
 
 - 使用者依本站提供、只含 Wiki 已查證文字的 prompt 重生第 4 張（品種）與第 5 張（風格）圖片；圖中文字逐字對照[青心烏龍](cultivars/qingxin-oolong.md)與[清香型、焙香型](styles/light-and-roasted-styles.md)，一致，出處標為已查證。
 - 使用者告知 8 張圖片皆以 GPT 生圖產生，已補入 assets/image-credits.json。簡報不再有預留框。
+
+## [2026-11-22] maintenance | 教學簡報版面微調
+
+- 依使用者要求調整[教學簡報](syntheses/tea-name-slides.md)：封面圖片縮小讓文字不斷句；第 8 張說明移到圖表上方、表格與圖片高度對齊；第 9 張圖片裁掉上方標題區，改回文字在左、圖片在右，三點文字恢復（與 query 產生時相同）。
+- 只調整版面與圖片裁切，沒有新增茶知識。check：0 errors。
