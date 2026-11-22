@@ -252,6 +252,9 @@ test('建置：簡報只輸出到 slides/，投影片連到讀者站文章', () 
     execFileSync(process.execPath, [path.join(root, 'scripts/index.mjs'), '--write'], { env: { ...process.env, TEAWIKI_ROOT: dir } });
     buildSite(dir);
     for (const file of ['index.html', 'slides.js', 'slides.css']) assert.ok(fs.existsSync(path.join(dir, 'dist/slides', file)), file);
+    const slidesPage = fs.readFileSync(path.join(dir, 'dist/slides/index.html'), 'utf8');
+    assert.match(slidesPage, /<nav id="outline"[^>]*aria-label="投影片目錄"/);
+    assert.match(slidesPage, /id="outline-toggle"[^>]*aria-controls="outline"/);
     const deck = JSON.parse(fs.readFileSync(path.join(dir, 'dist/slides/deck.json'), 'utf8'));
     assert.equal(deck.id, 'tea-name-slides');
     assert.deepEqual(deck.slides.map(s => s.title), ['測試簡報', '第一張', '第二張']);

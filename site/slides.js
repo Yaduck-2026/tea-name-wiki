@@ -70,6 +70,67 @@ function alignTable() {
 }
 addEventListener('resize', alignTable);
 
+// Slide outline sidebar. Desktop: beside the slide, hidden by default, the reader's choice is
+// remembered in this browser. Mobile: an overlay drawer that always starts closed.
+const toggle = document.querySelector('#outline-toggle');
+const outline = document.querySelector('#outline');
+const outlineList = document.querySelector('#outline-list');
+const backdrop = document.querySelector('#outline-backdrop');
+const OUTLINE_KEY = 'teawiki.slides.outline';
+const readPreference = () => { try { return localStorage.getItem(OUTLINE_KEY) === 'open'; } catch { return false; } };
+const savePreference = open => { try { localStorage.setItem(OUTLINE_KEY, open ? 'open' : 'closed'); } catch { /* storage unavailable: keep default */ } };
+let outlineOpen = false, focusToggleAfterJump = false;
+
+function setOutline(open, { remember = false } = {}) {
+  outlineOpen = open;
+  document.body.classList.toggle('outline-open', open);
+  toggle.setAttribute('aria-expanded', String(open));
+  backdrop.hidden = !(open && !wide.matches);
+  if (remember && wide.matches) savePreference(open);
+  if (open && !wide.matches) outlineList.querySelector('[aria-current="true"]')?.focus();
+  alignTable();
+}
+
+function closeDrawer() {
+  setOutline(false);
+  toggle.focus();
+}
+
+function buildOutline() {
+  outlineList.replaceChildren(...deck.slides.map((slide, i) => {
+    const item = el('li');
+    const link = el('a', '', `${i + 1}. ${slide.title}`);
+    link.href = `#${i + 1}`;
+    item.append(link);
+    return item;
+  }));
+  toggle.addEventListener('click', () => setOutline(!outlineOpen, { remember: true }));
+  backdrop.addEventListener('click', closeDrawer);
+  outlineList.addEventListener('click', event => {
+    if (!event.target.closest('a') || wide.matches) return;
+    focusToggleAfterJump = true;
+    setOutline(false);
+    if (event.target.closest('a').getAttribute('href') === location.hash) { focusToggleAfterJump = false; toggle.focus(); }
+  });
+  addEventListener('keydown', event => { if (event.key === 'Escape' && outlineOpen && !wide.matches) closeDrawer(); });
+  wide.addEventListener('change', event => setOutline(event.matches ? readPreference() : false));
+  setOutline(wide.matches ? readPreference() : false);
+}
+
+// Mark the current slide in the outline and keep it visible inside the outline's own scroll area.
+function markOutline() {
+  for (const link of outlineList.querySelectorAll('a')) {
+    const isCurrent = link.getAttribute('href') === `#${current + 1}`;
+    if (isCurrent) link.setAttribute('aria-current', 'true'); else link.removeAttribute('aria-current');
+    if (isCurrent && outlineOpen) {
+      // The outline is sticky (desktop) or fixed (mobile), so it is the links' offsetParent.
+      const top = link.offsetTop, bottom = top + link.offsetHeight;
+      if (top < outline.scrollTop) outline.scrollTop = top;
+      else if (bottom > outline.scrollTop + outline.clientHeight) outline.scrollTop = bottom - outline.clientHeight;
+    }
+  }
+}
+
 function show(index, focus) {
   current = clamp(index);
   const slide = deck.slides[current];
@@ -82,6 +143,8 @@ function show(index, focus) {
   prev.disabled = current === 0;
   next.disabled = current === total - 1;
   document.title = slide.cover ? `${deck.title}｜茶名有解` : `${slide.title}｜${deck.title}`;
+  markOutline();
+  if (focusToggleAfterJump) { focusToggleAfterJump = false; toggle.focus(); return; }
   if (focus) {
     const heading = stage.querySelector('h1,h2');
     if (heading) { heading.tabIndex = -1; heading.focus(); }
@@ -101,6 +164,7 @@ try {
   if (!response.ok) throw new Error(response.status);
   deck = await response.json();
   if (!deck.slides?.length) throw new Error('empty');
+  buildOutline();
   show(fromHash(), false);
   addEventListener('hashchange', () => show(fromHash(), true));
   prev.addEventListener('click', () => go(current - 1));

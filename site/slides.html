@@ -10,10 +10,20 @@
 </head>
 <body>
 <header class="bar">
-  <a class="home" href="../">← 茶名有解</a>
+  <div class="bar-left">
+    <button type="button" id="outline-toggle" class="outline-toggle" aria-expanded="false" aria-controls="outline">☰ 目錄</button>
+    <a class="home" href="../">← 茶名有解</a>
+  </div>
   <span class="counter" id="counter" aria-live="polite"></span>
 </header>
-<main id="stage" class="stage"><p class="loading">正在載入簡報…</p></main>
+<div class="layout">
+  <nav id="outline" class="outline" aria-label="投影片目錄">
+    <p class="outline-title">投影片目錄</p>
+    <ol id="outline-list"></ol>
+  </nav>
+  <main id="stage" class="stage"><p class="loading">正在載入簡報…</p></main>
+</div>
+<div class="outline-backdrop" id="outline-backdrop" hidden></div>
 <nav class="controls" aria-label="投影片切換">
   <button type="button" id="prev" aria-label="上一張">← 上一張</button>
   <div class="progress" aria-hidden="true"><span id="progress"></span></div>
