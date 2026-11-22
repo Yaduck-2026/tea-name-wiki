@@ -13,7 +13,7 @@ import { createWorkspace } from '../scripts/workspace.mjs';
 
 export function fixture() {
   const dir = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), 'teawiki-admin-test-'));
-  for (const name of ['wiki', 'raw', 'config', 'content', 'sources', 'research', 'docs', 'AGENTS.md']) fs.cpSync(path.join(root, name), path.join(dir, name), { recursive: true });
+  for (const name of ['wiki', 'raw', 'config', 'content', 'sources', 'research', 'docs', 'assets', 'AGENTS.md']) fs.cpSync(path.join(root, name), path.join(dir, name), { recursive: true });
   return dir;
 }
 export function cleanFixture(dir) {
@@ -260,6 +260,42 @@ test('建置：簡報只輸出到 slides/，投影片連到讀者站文章', () 
     assert.ok(!JSON.stringify(deck).includes('維護註記'));
     assert.ok(!fs.readFileSync(path.join(dir, 'dist/public-data.json'), 'utf8').includes('tea-name-slides'));
     assert.ok(fs.readFileSync(path.join(dir, 'dist/reader.js'), 'utf8').includes('href="./slides/"'));
+  } finally { cleanFixture(dir); }
+});
+
+test('簡報圖片：出處、預留框、每張一張，建置時複製並加圖說', () => {
+  const dir = fixture();
+  try {
+    const workspace = createWorkspace(dir), deckFile = path.join(dir, 'wiki/syntheses/tea-name-slides.md');
+    const imageDir = path.join(dir, 'assets/images'), creditsFile = path.join(dir, 'assets/image-credits.json');
+    fs.writeFileSync(path.join(imageDir, 'test-photo.jpg'), 'not really a jpg');
+    const deckWith = (slide2, slide3) => deckPage(undefined, 'tea-name-slides')
+      .replace('## 第一張\n\n', `## 第一張\n\n${slide2}\n\n`)
+      .replace('## 第二張\n\n', `## 第二張\n\n${slide3}\n\n`);
+    const imageMessages = () => { const r = workspace.check(dir, false); return { errors: r.errors.filter(e => e.includes('圖片')), warnings: r.warnings.filter(w => w.includes('圖片')) }; };
+
+    fs.writeFileSync(creditsFile, '[]');
+    fs.writeFileSync(deckFile, deckWith('![測試照片](../../assets/images/test-photo.jpg)', '![尚未提供](../../assets/images/not-yet.jpg)'));
+    let r = imageMessages();
+    assert.equal(r.errors.length, 1);
+    assert.match(r.errors[0], /第 2 張圖片缺少完整出處紀錄.*test-photo\.jpg/);
+    assert.deepEqual(r.warnings, ['tea-name-slides: 第 3 張圖片尚未提供，顯示預留框：not-yet.jpg']);
+
+    fs.writeFileSync(creditsFile, JSON.stringify([{ file: 'test-photo.jpg', caption: '測試照片', kind: 'ai-generated', tool: null, createdAt: '2026-11-22', textVerified: false }]));
+    assert.deepEqual(imageMessages().errors, []);
+
+    fs.writeFileSync(deckFile, deckWith('![一](../../assets/images/test-photo.jpg)\n\n![二](../../assets/images/test-photo.jpg)', ''));
+    assert.ok(imageMessages().errors.some(e => e.includes('第 2 張有 2 張圖片')));
+
+    fs.writeFileSync(deckFile, deckWith('![測試照片](../../assets/images/test-photo.jpg)', '![尚未提供](../../assets/images/not-yet.jpg)'));
+    buildSite(dir);
+    const deck = JSON.parse(fs.readFileSync(path.join(dir, 'dist/slides/deck.json'), 'utf8'));
+    assert.deepEqual(deck.slides[1].image, { alt: '測試照片', src: 'images/test-photo.jpg', missing: false, caption: '示意圖：測試照片（AI 生成，圖中文字未經本站查證，以投影片文字與依據頁為準）' });
+    assert.equal(deck.slides[2].image.missing, true);
+    assert.equal(deck.slides[2].image.src, null);
+    assert.ok(!deck.slides[1].html.includes('test-photo') && !deck.slides[1].html.includes('@@IMAGE'));
+    assert.ok(fs.existsSync(path.join(dir, 'dist/slides/images/test-photo.jpg')));
+    assert.ok(!fs.existsSync(path.join(dir, 'dist/slides/images/not-yet.jpg')));
   } finally { cleanFixture(dir); }
 });
 

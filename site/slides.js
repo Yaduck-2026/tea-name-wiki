@@ -9,11 +9,52 @@ let deck, current = 0;
 const clamp = n => Math.min(Math.max(n, 0), deck.slides.length - 1);
 const fromHash = () => clamp((parseInt(location.hash.slice(1), 10) || 1) - 1);
 
+const el = (tag, className, text) => {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+};
+
+// Split a slide into heading, body, image and citation areas so CSS can lay them out.
+function slideElement(slide) {
+  const article = el('article', `slide${slide.cover ? ' cover' : ''}`);
+  article.setAttribute('aria-roledescription', '投影片');
+  const body = el('div', 'slide-body');
+  body.innerHTML = slide.html;
+  const head = el('div', 'slide-head');
+  if (slide.cover) head.append(el('p', 'eyebrow', '茶名有解 · 教學簡報'));
+  const heading = body.querySelector('h1,h2');
+  if (heading) head.append(heading);
+  const cites = el('div', 'slide-cites');
+  for (const p of [...body.querySelectorAll('p')]) if (p.textContent.trim().startsWith('依據：')) { p.classList.add('cite'); cites.append(p); }
+  article.append(head);
+  if (slide.image) {
+    const figure = el('figure', 'slide-figure');
+    if (slide.image.missing) {
+      const box = el('div', 'placeholder');
+      box.setAttribute('role', 'img');
+      box.setAttribute('aria-label', `圖片預留：${slide.image.alt}`);
+      box.append(el('strong', '', '圖片預留'), el('span', '', slide.image.alt));
+      figure.append(box);
+    } else {
+      const img = el('img');
+      Object.assign(img, { src: slide.image.src, alt: slide.image.alt, loading: 'lazy', decoding: 'async' });
+      figure.append(img);
+      if (slide.image.caption) figure.append(el('figcaption', '', slide.image.caption));
+    }
+    article.classList.add(body.textContent.trim() ? 'has-image' : 'image-only');
+    article.append(figure);
+  }
+  if (body.textContent.trim()) article.append(body);
+  if (cites.childElementCount) article.append(cites);
+  return article;
+}
+
 function show(index, focus) {
   current = clamp(index);
   const slide = deck.slides[current];
-  stage.innerHTML = `<article class="slide${slide.cover ? ' cover' : ''}" aria-roledescription="投影片">${slide.cover ? '<p class="eyebrow">茶名有解 · 教學簡報</p>' : ''}${slide.html}</article>`;
-  for (const p of stage.querySelectorAll('p')) if (p.textContent.trim().startsWith('依據：')) p.classList.add('cite');
+  stage.replaceChildren(slideElement(slide));
   const total = deck.slides.length;
   counter.textContent = `第 ${current + 1} 張，共 ${total} 張`;
   bar.style.width = `${((current + 1) / total) * 100}%`;

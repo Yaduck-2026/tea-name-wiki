@@ -88,3 +88,20 @@ provenance: "operation-log"
 - 回存：[教學簡報：從茶名讀懂台灣茶](syntheses/tea-name-slides.md)，synthesisType 為 slide-deck，共 15 張；每張以「依據」連到 Wiki 頁。另在[總覽](overview.md)加上入口說明。
 - 核對：60 個關鍵說法逐一對照引用頁，全部有依據；未加入 Wiki 以外的知識、療效或商品推薦。
 - 限制：簡報是 Wiki 的再整理，不是新的查證；茶名為教學組合示例。未連網、未搜尋新資料。check：23 頁、0 errors、0 warnings。
+
+## [2026-11-22] maintenance | 教學簡報第 7 張加入範例茶名
+
+- 依使用者要求，在[教學簡報](syntheses/tea-name-slides.md)第 7 張「白話翻譯」的標題下方加上範例「杉林溪龍鳳峽・青心烏龍・清香型・冬茶」，再接白話翻譯。
+- 只調整版面與呈現順序，沒有新增茶知識；依據頁不變。check：0 errors。
+
+## [2026-11-22] maintenance | 教學簡報加入圖片
+
+- 依使用者要求，在[教學簡報](syntheses/tea-name-slides.md)第 1、3、8、9、11、12 張加入使用者提供的 AI 生成圖片（壓縮為 JPG，原始 PNG 只留本機）；出處登記在 assets/image-credits.json。
+- 第 4、5 張原圖有與 Wiki 矛盾的內容（臺茶 18 號誤標為紅烏龍、青心烏龍「適應性強」；製程漏殺菁且順序錯），未使用，改顯示預留框，待使用者重生。
+- 圖中文字未經本站查證者，圖說一律標明；投影片文字仍只取自 Wiki。第 9 張改為標題加圖片，原文字改寫為替代文字，內容不變。
+- 限制：生成工具名稱待使用者補充。check：0 errors、2 warnings（第 4、5 張待補圖）。
+
+## [2026-11-22] maintenance | 教學簡報第 4、5 張換上重生圖片
+
+- 使用者依本站提供、只含 Wiki 已查證文字的 prompt 重生第 4 張（品種）與第 5 張（風格）圖片；圖中文字逐字對照[青心烏龍](cultivars/qingxin-oolong.md)與[清香型、焙香型](styles/light-and-roasted-styles.md)，一致，出處標為已查證。
+- 使用者告知 8 張圖片皆以 GPT 生圖產生，已補入 assets/image-credits.json。簡報不再有預留框。

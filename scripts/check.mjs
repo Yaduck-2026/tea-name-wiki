@@ -45,7 +45,8 @@ for (const p of pages) {
     else if (m.status === 'published' && target.meta.status !== 'published') fail(`${m.id}: 公開頁指向草稿 ${id}`);
   }
   for (const id of Array.isArray(m.sources) ? m.sources : []) if (ids.get(id)?.meta.kind !== 'source') fail(`${m.id}: ${id} 不是來源頁`);
-  const linkText = p.body.replace(/```[^]*?```/g, '');
+  // Whole-line images in slide decks are checked by the slide-image rule below, not as links.
+  const linkText = p.body.replace(/```[^]*?```/g, '').replace(m.synthesisType === 'slide-deck' ? /^!\[[^\]]*\]\([^)]*\)[ \t]*$/gm : /$^/, '');
   for (const match of linkText.matchAll(/\]\(([^)]+)\)/g)) {
     let href = match[1];
     if (/^https?:\/\//i.test(href) || href.startsWith('#')) continue;
@@ -99,6 +100,23 @@ for (const p of pages.filter(p => p.meta.synthesisType === 'slide-deck')) {
       return target && ['concept', 'tea-name', 'source'].includes(target.meta.kind) && target.meta.status === 'published';
     });
     if (!cited) fail(`${p.meta.id}: 投影片缺少依據（第 ${i + 2} 張：${slide.split('\n')[0].replace(/^## /, '')}）`);
+  });
+  // Slide images: under assets/images, at most one per slide, credited when present, placeholder when missing.
+  const imagesDir = path.join(root, 'assets/images');
+  const creditsFile = path.join(root, 'assets/image-credits.json');
+  const credits = fs.existsSync(creditsFile) ? JSON.parse(fs.readFileSync(creditsFile, 'utf8')) : [];
+  p.body.replace(/\n## 維護註記\n[^]*/, '\n').split(/\n(?=## )/).forEach((slide, i) => {
+    const images = [...slide.matchAll(/^!\[([^\]]*)\]\(([^)\s]+)\)[ \t]*$/gm)];
+    const where = `第 ${i + 1} 張`;
+    if (images.length > 1) fail(`${p.meta.id}: ${where}有 ${images.length} 張圖片，每張投影片最多一張`);
+    for (const [, alt, href] of images) {
+      const source = path.resolve(path.dirname(p.file), href), file = path.basename(source);
+      if (path.relative(imagesDir, source) !== file || !/\.(jpe?g|png|webp)$/i.test(file)) { fail(`${p.meta.id}: ${where}圖片須放在 assets/images 且為 jpg、png 或 webp：${href}`); continue; }
+      if (!alt.trim()) fail(`${p.meta.id}: ${where}圖片缺少替代文字`);
+      if (!fs.existsSync(source)) { warnings.push(`${p.meta.id}: ${where}圖片尚未提供，顯示預留框：${file}`); continue; }
+      const credit = credits.find(c => c.file === file);
+      if (!credit || typeof credit.caption !== 'string' || !credit.caption.trim() || !['ai-generated', 'original', 'licensed'].includes(credit.kind) || !/^\d{4}-\d{2}-\d{2}$/.test(credit.createdAt ?? '') || ![true, false, null].includes(credit.textVerified)) fail(`${p.meta.id}: ${where}圖片缺少完整出處紀錄（assets/image-credits.json）：${file}`);
+    }
   });
 }
 if (!index) fail('缺 index.md');

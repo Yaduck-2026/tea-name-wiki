@@ -1,1 +1,82 @@
-[]
+[
+  {
+    "file": "slide-01-cover.jpg",
+    "caption": "一杯茶與山間茶園",
+    "kind": "ai-generated",
+    "tool": "GPT 生圖（OpenAI，使用者告知）",
+    "createdAt": "2026-11-22",
+    "textVerified": null,
+    "original": "slide-01-cover.png",
+    "notes": "使用者以本站提供的 prompt 生成；圖中沒有文字。"
+  },
+  {
+    "file": "slide-03-origin.jpg",
+    "caption": "台灣茶產地地圖",
+    "kind": "ai-generated",
+    "tool": "GPT 生圖（OpenAI，使用者告知）",
+    "createdAt": "2026-11-22",
+    "textVerified": false,
+    "original": "slide-03-origin.png",
+    "notes": "圖中 9 個產地、代表茶與標點位置不在 Wiki 中，未經查證。"
+  },
+  {
+    "file": "slide-04-cultivar.jpg",
+    "caption": "青心烏龍：品種是茶樹，不是茶類",
+    "kind": "ai-generated",
+    "tool": "GPT 生圖（OpenAI，使用者告知）",
+    "createdAt": "2026-11-22",
+    "textVerified": true,
+    "original": "slide-04-cultivar.png",
+    "notes": "第二版。依本站提供、只含 Wiki 已查證文字的 prompt 重生；圖中文字已逐字對照青心烏龍頁，一致。第一版把臺茶 18 號標成紅烏龍、稱青心烏龍適應性強，已棄用。"
+  },
+  {
+    "file": "slide-05-style.jpg",
+    "caption": "清香型與焙香型",
+    "kind": "ai-generated",
+    "tool": "GPT 生圖（OpenAI，使用者告知）",
+    "createdAt": "2026-11-22",
+    "textVerified": true,
+    "original": "slide-05-style.png",
+    "notes": "第二版。依本站提供、只含 Wiki 已查證文字的 prompt 重生；圖中文字已逐字對照清香型、焙香型頁，一致。第一版製程漏殺菁且順序錯，已棄用。"
+  },
+  {
+    "file": "slide-08-tea-colors.jpg",
+    "caption": "六大茶類的乾茶與茶湯",
+    "kind": "ai-generated",
+    "tool": "GPT 生圖（OpenAI，使用者告知）",
+    "createdAt": "2026-11-22",
+    "textVerified": false,
+    "original": "slide-08-tea-colors.png",
+    "notes": "代表茶（含非台灣茶）與風味描述不在 Wiki 中，未經查證。"
+  },
+  {
+    "file": "slide-09-ferment.jpg",
+    "caption": "茶的發酵程度：另一種分法",
+    "kind": "ai-generated",
+    "tool": "GPT 生圖（OpenAI，使用者告知）",
+    "createdAt": "2026-11-22",
+    "textVerified": false,
+    "original": "slide-09-ferment.png",
+    "notes": "分類、黑茶後發酵、分類角度與發酵度參考範圍與 Wiki 一致；各類的風味描述不在 Wiki 中，因此整體標為未查證。"
+  },
+  {
+    "file": "slide-11-leafhopper.jpg",
+    "caption": "小綠葉蟬與著蜒",
+    "kind": "ai-generated",
+    "tool": "GPT 生圖（OpenAI，使用者告知）",
+    "createdAt": "2026-11-22",
+    "textVerified": false,
+    "original": "slide-11-leafhopper.png",
+    "notes": "「啟動防禦機制」「茶芽呈紅褐色為關鍵特徵」不在 Wiki 中，未經查證。"
+  },
+  {
+    "file": "slide-12-brewing.jpg",
+    "caption": "三種常見泡茶方式",
+    "kind": "ai-generated",
+    "tool": "GPT 生圖（OpenAI，使用者告知）",
+    "createdAt": "2026-11-22",
+    "textVerified": false,
+    "original": "slide-12-brewing.png",
+    "notes": "圖中只有短標語（方便日常、細品層次、清爽耐喝），屬描述性用語，未經查證。"
+  }
+]

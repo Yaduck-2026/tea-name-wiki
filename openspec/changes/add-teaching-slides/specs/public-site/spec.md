@@ -4,7 +4,7 @@
 
 ### Requirement: 公開白名單
 
-公開輸出 SHALL 採白名單，只納入：已公開的概念頁、茶名頁、非 user-message 的來源摘要、具有 evidenceLevel 的觀察綜合頁，以及已公開的教學簡報（只輸出到 slides/，不列入讀者站的文章資料）。輸出 MUST 排除 raw、research、index、log、內部政策、示範問答、草稿、備份與私有資料。
+公開輸出 SHALL 採白名單，只納入：已公開的概念頁、茶名頁、非 user-message 的來源摘要、具有 evidenceLevel 的觀察綜合頁，已公開的教學簡報（只輸出到 slides/，不列入讀者站的文章資料），以及簡報引用且已登記出處的圖片。輸出 MUST 排除 raw、research、index、log、內部政策、示範問答、草稿、備份與私有資料。
 
 #### Scenario: 草稿不輸出
 

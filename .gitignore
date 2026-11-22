@@ -11,3 +11,6 @@ raw/social/
 .tmp/
 .local/
 /publish-teawiki.cmd
+
+# Original full-size slide images stay local; the site uses the optimized JPGs.
+assets/images/*.png

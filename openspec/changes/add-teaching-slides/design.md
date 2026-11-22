@@ -19,7 +19,7 @@
 
 **Non-Goals:**
 
-- 不做圖片、動畫、演講者備註、匯出 PDF／PPTX。
+- 不做動畫、演講者備註、匯出 PDF／PPTX。圖片只在簡報支援（2026-11-22 追加），讀者站文章仍不顯示圖片。
 - 不新增或修改茶知識內容；Wiki 缺的內容就不放進簡報。
 - 不做通用的多份簡報管理介面（目前只有一份）。
 
@@ -44,6 +44,27 @@ slides.js 讀 `deck.json`，以 `location.hash`（`#1`～`#N`）記錄目前張�
 
 **6. 流程說明文件。**
 `docs/llm-wiki-loop.md`，用 Mermaid 流程圖（GitHub 會直接顯示）畫出：使用者授權 → 取得原文（raw）→ ingest（來源摘要、整合知識頁、index、log）→ check／lint → query（讀 index 與相關頁）→ 撰寫並回存簡報頁 → check → build → push 自動部署。文中回答三個問題：哪些步驟會重複、哪裡會檢查或重新生成、為什麼這樣設計；並以本專案實際發生的例子說明（例如核對原文後修正六大茶類說法、退役原件、CI 測試擋下部署）。
+
+**7. 投影片圖片（2026-11-22 追加）。**
+- 語法：投影片中單獨一行 `![替代文字](../../assets/images/<檔名>)`。build 在轉 Markdown 前把這一行抽出，不交給 `renderMarkdown`（讀者站與管理預覽維持不顯示圖片），改存成投影片資料的 `image` 欄位：`{ src, alt, caption, missing }`。
+- 檔案存在：複製到 `dist/slides/images/`，`src` 為 `images/<檔名>`；圖說取自出處表。檔案不存在：`missing: true`，slides.js 顯示虛線「圖片預留」框與替代文字。
+- 版面：有圖又有文字時，桌機以兩欄（文字左、圖右）呈現，手機改為標題、圖、文字的順序；只有標題、圖片與「依據」的投影片，圖片置中放大。
+- 出處表 `assets/image-credits.json`：每筆 `{ file, caption, kind: "ai-generated"|"original"|"licensed", tool, createdAt, textVerified, original, notes }`；`kind` 為 ai-generated 或 original 時圖說前加「示意圖：」，`textVerified` 為 false 時圖說後加未查證提醒。
+- 檔案大小：原始 PNG（約 2 MB）只留本機（以 .gitignore 排除 `assets/images/*.png`），網站使用 Windows .NET 轉出的寬 1200 像素 JPG。
+- 替代方案：直接用原始 PNG，每張約 2 MB、共約 17 MB，手機載入太慢，不採用。
+
+## 投影片圖片清單（2026-11-22 使用者提供）
+
+| 張 | 檔名（網站用） | 狀態 |
+| --- | --- | --- |
+| 1 封面 | slide-01-cover.jpg | 使用；照片，無文字 |
+| 3 產地 | slide-03-origin.jpg | 使用；圖中 9 個產地與標點未經查證 |
+| 4 品種 | slide-04-cultivar.jpg | 使用第二版；第一版把臺茶 18 號標成紅烏龍、稱青心烏龍適應性強，已依只含 Wiki 文字的 prompt 重生，圖中文字已查證 |
+| 5 風格 | slide-05-style.jpg | 使用第二版；第一版製程漏殺菁、順序錯，已重生，圖中文字已查證 |
+| 8 六大茶類 | slide-08-tea-colors.jpg | 使用；代表茶與風味描述未經查證 |
+| 9 發酵程度 | slide-09-ferment.jpg | 使用；內容與 Wiki 一致，本張改為標題＋圖片，原文字改寫為替代文字 |
+| 11 東方美人 | slide-11-leafhopper.jpg | 使用；「防禦機制」「紅褐色為關鍵特徵」未經查證 |
+| 12 沖泡 | slide-12-brewing.jpg | 使用；只有短標語 |
 
 ## 簡報大綱（草案，實作時依 query 結果微調）
 

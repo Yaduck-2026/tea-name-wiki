@@ -27,18 +27,44 @@ export function buildSite(projectRoot = root, output = path.join(projectRoot, 'd
   });
   const documents = allowed.map((p, i) => ({ ...safePages[i], body: publicBody(p), html: htmlFor(p) }));
   // Each "## " section is one slide; the text before the first one is the cover.
-  const deckFor = p => ({
-    id: p.meta.id, title: p.meta.title, summary: p.meta.summary, updated: p.meta.updated,
-    slides: publicBody(p).trim().split(/\n(?=## )/).map((section, i) => ({
-      title: i ? section.split('\n')[0].replace(/^## /, '').trim() : p.meta.title,
-      cover: i === 0,
-      html: renderMarkdown(section, href => {
-        if (/^https?:\/\//i.test(href)) return href;
-        const dest = path.resolve(path.dirname(p.file), href.split('#')[0]);
-        return files.has(dest) ? `../#article/${files.get(dest)}` : null;
+  // A line holding only ![alt](path) becomes the slide image; it is pulled out before
+  // publicBody, which would otherwise turn it into plain text like any non-public link.
+  const creditsFile = path.join(projectRoot, 'assets/image-credits.json');
+  const credits = fs.existsSync(creditsFile) ? JSON.parse(fs.readFileSync(creditsFile, 'utf8')) : [];
+  const imageAssets = new Map();
+  const captionFor = credit => {
+    if (!credit) return '';
+    const illustrative = ['ai-generated', 'original'].includes(credit.kind);
+    const note = credit.kind === 'ai-generated' ? (credit.textVerified === false ? '（AI 生成，圖中文字未經本站查證，以投影片文字與依據頁為準）' : '（AI 生成）') : '';
+    return `${illustrative ? '示意圖：' : ''}${credit.caption}${note}`;
+  };
+  const deckFor = p => {
+    const images = [];
+    const body = p.body.replace(/^!\[([^\]]+)\]\(([^)\s]+)\)[ \t]*$/gm, (line, alt, href) => {
+      const source = path.resolve(path.dirname(p.file), href), file = path.basename(source);
+      const exists = fs.existsSync(source) && path.relative(path.join(projectRoot, 'assets/images'), source) === file;
+      if (exists) imageAssets.set(file, source);
+      images.push({ alt, src: exists ? `images/${file}` : null, missing: !exists, caption: exists ? captionFor(credits.find(c => c.file === file)) : '' });
+      return `@@IMAGE${images.length - 1}@@`;
+    });
+    return {
+      id: p.meta.id, title: p.meta.title, summary: p.meta.summary, updated: p.meta.updated,
+      slides: publicBody({ ...p, body }).trim().split(/\n(?=## )/).map((section, i) => {
+        const token = section.match(/@@IMAGE(\d+)@@/);
+        const text = section.replace(/^@@IMAGE\d+@@\n?/gm, '');
+        return {
+          title: i ? text.split('\n')[0].replace(/^## /, '').trim() : p.meta.title,
+          cover: i === 0,
+          image: token ? images[Number(token[1])] : null,
+          html: renderMarkdown(text, href => {
+            if (/^https?:\/\//i.test(href)) return href;
+            const dest = path.resolve(path.dirname(p.file), href.split('#')[0]);
+            return files.has(dest) ? `../#article/${files.get(dest)}` : null;
+          })
+        };
       })
-    }))
-  });
+    };
+  };
   const categories = JSON.parse(fs.readFileSync(path.join(projectRoot, 'config/categories.json'), 'utf8'));
   const sourceDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../site');
   // Clear only known generated output after checking it remains inside the project.
@@ -57,6 +83,8 @@ export function buildSite(projectRoot = root, output = path.join(projectRoot, 'd
   if (decks.length) {
     fs.mkdirSync(path.join(resolved, 'slides'));
     fs.writeFileSync(path.join(resolved, 'slides/deck.json'), JSON.stringify(deckFor(decks[0])));
+    if (imageAssets.size) fs.mkdirSync(path.join(resolved, 'slides/images'));
+    for (const [file, source] of imageAssets) fs.copyFileSync(source, path.join(resolved, 'slides/images', file));
     fs.copyFileSync(path.join(sourceDir, 'slides.html'), path.join(resolved, 'slides/index.html'));
     for (const file of ['slides.js', 'slides.css']) fs.copyFileSync(path.join(sourceDir, file), path.join(resolved, 'slides', file));
   }
